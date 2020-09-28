@@ -1,0 +1,147 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container archive">
+    <h1 class="archive-title">Archives</h1>
+    <div class="archive-subtitle">
+        <span class="iconfont icon-post archive-icon"></span> 21 Posts
+    </div>
+
+    
+    
+        
+
+        
+            <h4 class="archive-date">Mar, 2019</h4>
+        
+
+        <!-- <li class="archive-post">
+            <a class="archive-post-link" href="/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/">
+                <span class="archive-post-title">在 Linux 下升级 R 环境</span>
+                <span class="archive-post-date">Mar 14, 2019</span>
+            </a>
+        </li> -->
+
+        <div class="archive-post">
+            <h4 class="archive-post-title">
+                <a href="/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/">在 Linux 下升级 R 环境</a>
+            </h4>
+            <p>
+                
+                    默认的 Linux 环境下使用apt-get安装的 R 环境的版本普遍偏低，如 Ubuntu 16.04 默认安装的 R 环境版本是3.2.3，很多包就不能用。这里记录一下在 Ubuntu 中自定义升级 R 环境到特定版本的方法。
+1. 添加指定的 CRAN 源首先打开 Ubuntu 的软件源文件，加入对应的 CRAN 源：
+12345sudo vim /etc/apt/sources.list## 升级到 R 环境 3.5.x 的最新版本(Ubuntu 16.04 下)deb https://
+                
+            </p>
+            <span class="archive-post-date">Mar 14, 2019</span>
+            <a href="/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/">
+                <span class="archive-more iconfont icon-post"></span>
+            </a>
+        </div>
+
+    
+    
+</div>
+
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>

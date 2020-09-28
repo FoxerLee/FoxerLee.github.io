@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>Hexo 添加文章字数和阅读时长 | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">Hexo 添加文章字数和阅读时长</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Feb 17, 2020</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/%E6%95%99%E7%A8%8B/">教程 </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/Hexo/">Hexo </a>&nbsp;
+            
+                <a href="/tags/%E5%89%8D%E7%AB%AF/">前端 </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">408 Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">1 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>文章字数和阅读时长的统计都是借助 <code>hexo-wordcount</code> 插件实现，可以使用 <code>npm</code> 或者 <code>yarn</code> 安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add hexo-wordcount</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">npm i --save hexo-wordcount</span><br></pre></td></tr></table></figure>
+<p><code>Node</code> 版本在 7.6.0 之前，请安装 2.x 版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save hexo-wordcount@2</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在主题的配置文件 _config.yml 中添加如下 <code>hexo-wordcount</code> 插件的配置说明：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Post wordcount display settings</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/willin/hexo-wordcount</span></span><br><span class="line"><span class="attr">post_wordcount:</span></span><br><span class="line">  <span class="attr">item_text:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">wordcount:</span> <span class="literal">true</span>         <span class="comment"># 单篇 字数统计</span></span><br><span class="line">  <span class="attr">min2read:</span> <span class="literal">true</span>          <span class="comment"># 单篇 阅读时长</span></span><br><span class="line">  <span class="attr">totalcount:</span> <span class="literal">false</span>       <span class="comment"># 网站 字数统计</span></span><br></pre></td></tr></table></figure>
+
+<p>可以同时在主题配置文件中添加如下的控制配置，实现利用配置文件控制是否显示字数统计和阅读时长等。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_wordcount_enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">post_min2read_enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到-post-页面"><a href="#添加到-post-页面" class="headerlink" title="添加到 post 页面"></a>添加到 post 页面</h2><p>我使用的是 <a target="_blank" rel="noopener" href="https://github.com/Siricee/hexo-theme-Chic">Chic</a> 主题，post 的 layout 文件在 <code>themes/Chic/layout/_page/post.ejs</code>。其他主题的 layout 文件位置应该类似。</p>
+<p>在其中修改添加如下 code：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Category:</span><br><span class="line">        <span class="tag">&lt;<span class="name">%</span> <span class="attr">page.categories.forEach</span>(<span class="attr">item</span>=&gt;</span>&#123; %&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&lt;%- url_for(item.path) %&gt;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">%-</span> <span class="attr">item.name</span> %&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%</span> &#125;) %&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">// 下面为添加的新代码</span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>(<span class="attr">theme.post_wordcount_enable</span>)&#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;post-count&quot;</span>&gt;</span></span><br><span class="line">Words:</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">wordcount</span>(<span class="attr">page.content</span>) %&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>(<span class="attr">theme.post_min2read_enable</span>)&#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;post-count&quot;</span>&gt;</span></span><br><span class="line">Time:</span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">min2read</span>(<span class="attr">post.content</span>) %&gt;</span>min<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Chic 使用的是 <code>Ejs</code>，其他如 <code>Swag</code>、<code>Jade</code> 的写法可参照 <code>hexo-wordcount</code> <a target="_blank" rel="noopener" href="https://github.com/willin/hexo-wordcount">仓库</a>中的说明。</p>
+<p>参考样例可看本文的 head 部分🤖</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><code>hexo-wordcount</code> 仓库：<a target="_blank" rel="noopener" href="https://github.com/willin/hexo-wordcount">https://github.com/willin/hexo-wordcount</a></li>
+<li>Hexo添加字数统计、阅读时长：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/baea8c95e39b">https://www.jianshu.com/p/baea8c95e39b</a></li>
+</ul>
+
+    </article>
+
+    
+        <div class="copyright">
+            
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/02/17/wordcount/">http://www.foxerlee.top/2020/02/17/wordcount/</a>
+                </p>
+            
+            
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+              <li class="page-item prev-link">
+                  <a class="page-link" href="/2020/03/22/flowsense/"> &laquo; Prev </a>
+              </li>
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>

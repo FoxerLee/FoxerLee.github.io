@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>在 Linux 下升级 R 环境 | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">在 Linux 下升级 R 环境</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Mar 14, 2019</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/%E6%95%99%E7%A8%8B/">教程 </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/R/">R </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">326 Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">1 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <p>默认的 Linux 环境下使用<code>apt-get</code>安装的 R 环境的版本普遍偏低，如 Ubuntu 16.04 默认安装的 R 环境版本是<code>3.2.3</code>，很多包就不能用。这里记录一下在 Ubuntu 中自定义升级 R 环境到特定版本的方法。</p>
+<h3 id="1-添加指定的-CRAN-源"><a href="#1-添加指定的-CRAN-源" class="headerlink" title="1. 添加指定的 CRAN 源"></a>1. 添加指定的 CRAN 源</h3><p>首先打开 Ubuntu 的软件源文件，加入对应的 CRAN 源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br><span class="line"><span class="comment">## 升级到 R 环境 3.5.x 的最新版本(Ubuntu 16.04 下)</span></span><br><span class="line">deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/</span><br><span class="line"><span class="comment">## 升级到 R 环境 3.4.x 的最新版本(Ubuntu 16.04 下)</span></span><br><span class="line">deb https://cloud.r-project.org/bin/linux/ubuntu xenial/</span><br></pre></td></tr></table></figure>
+
+<p>如果针对其他的 Ubuntu 版本，如<code>14.04</code>，可以在 R 的官网 （<a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/linux/ubuntu/%EF%BC%89">https://cran.r-project.org/bin/linux/ubuntu/）</a> 中找到对应的 CRAN 源。</p>
+<p>之后更新软件源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>这时候可能会出现缺失公钥的错误，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The Ubuntu archives on CRAN are signed with the key of “Michael Rutter marutter@gmail.com” with key ID E084DAB9</span><br></pre></td></tr></table></figure>
+
+<p>需要通过下面的方法添加公钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装-R-环境"><a href="#2-安装-R-环境" class="headerlink" title="2. 安装 R 环境"></a>2. 安装 R 环境</h3><p>之后直接使用<code>apt-get</code>安装 R 环境，就能够安装到自定义的版本了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install r-base</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://www.bioinfo-scrounger.com/archives/262">http://www.bioinfo-scrounger.com/archives/262</a></li>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/linux/ubuntu/">https://cran.r-project.org/bin/linux/ubuntu/</a></li>
+</ol>
+
+    </article>
+
+    
+        <div class="copyright">
+            
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/">http://www.foxerlee.top/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/</a>
+                </p>
+            
+            
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+              <li class="page-item prev-link">
+                  <a class="page-link" href="/2019/05/01/%E5%8D%97%E4%BA%AC%E8%A1%8C%E5%90%8E%E7%9A%84%E6%9D%82%E6%83%B3/"> &laquo; Prev </a>
+              </li>
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>

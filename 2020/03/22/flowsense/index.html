@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>FlowSense 论文笔记 | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">FlowSense 论文笔记</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Mar 22, 2020</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/%E8%AE%BA%E6%96%87/">论文 </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/NLI/">NLI </a>&nbsp;
+            
+                <a href="/tags/Visualization/">Visualization </a>&nbsp;
+            
+                <a href="/tags/DFVS/">DFVS </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">567 Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">2 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <p>随意记录一下阅读论文中的启发和一些重要的点，可能顺序比较混乱，哈哈。</p>
+<h2 id="系统简介"><a href="#系统简介" class="headerlink" title="系统简介"></a>系统简介</h2><p>作者将 Natural language interface（NLI）和 Dataflow visualization systems（DFVS）结合，构建了 FlowSense 系统。这个系统利用 NL 技术减少数据流图的学习开销。这个系统通过语义分析，为数据流图中的内容加上一些 tag，并且这些 tag 是内容独立的，不受数据集影响，用户可以与这些 tag 进行交互，从而更好理解结果，方便 bug 搜寻。</p>
+<h2 id="Natural-language-interface（NLI）"><a href="#Natural-language-interface（NLI）" class="headerlink" title="Natural language interface（NLI）"></a>Natural language interface（NLI）</h2><p>论文中提及的其他 NLI 系统：</p>
+<ul>
+<li>InfoStill</li>
+<li>DataTone</li>
+<li>Orko</li>
+<li>IBM Watson Analytics</li>
+<li>Microsoft Power BI</li>
+<li>Wolfram Alpha</li>
+</ul>
+<p>FlowSense 是基于 VisFlow 进行的构建。</p>
+<p>一个 NLI 的<a target="_blank" rel="noopener" href="http://www.cpanel.stpaulsscience.org/gceict/specifications/wjec/unit1/technical/hci/natural.htm">解释</a>，主要是允许用户通过一些日常的语言、短句等与信息系统交互，而不需要知晓专业的名词才能知道结果。</p>
+<h3 id="FlowSense-与-其他-NLI-系统的区别"><a href="#FlowSense-与-其他-NLI-系统的区别" class="headerlink" title="FlowSense 与 其他 NLI 系统的区别"></a>FlowSense 与 其他 NLI 系统的区别</h3><ul>
+<li>用户可以调用检索多个时间段下的 queries，而不是仅仅一个。</li>
+<li>反馈是实时的，不需要等待整个 queries 完成。</li>
+<li>从 FlowSense 反馈的分数可以结合 DFVS 很好地理解。</li>
+</ul>
+<h2 id="FlowSense-中的-Semantic-Parser"><a href="#FlowSense-中的-Semantic-Parser" class="headerlink" title="FlowSense 中的 Semantic Parser"></a>FlowSense 中的 Semantic Parser</h2><p>为了构建 Semantic Parser，作者首先分析了 VisFlow 中的各种示意图，并最终选择了 6 种作为主要用到的 VisFlow 图。</p>
+<p>FlowSense 首先提取了一个叫 special utterances 的东西。这是一些从输入数据和 VisFlow 示意图中提取出的单词，能够代表数据和图的含义。这一步应该是人为定义的，比如说 table 的 column name，VisFlow 中的 node name，node type等。</p>
+<p>针对 Semantic Parser 的生成，FlowSense 通过 Stanford SEMPRE framework 和 CoreNLP toolkit 构建。文中提到是使用 derivation 的方法。还有一些具体的 NLP 内容，在文中 3.x 和 4.x 有详细介绍。我看不懂，就略过。</p>
+<h2 id="FlowSense-的验证"><a href="#FlowSense-的验证" class="headerlink" title="FlowSense 的验证"></a>FlowSense 的验证</h2><p>还是通过列举应用实例，以及调研使用者的反馈来实现。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这篇文章主要是借助了 NLP 中的 NLI 技术，对 VisFlow 示意图的内容通过文字的形式进行了可视化，让用户能够更加直观地理解数据流图。并且 FlowSense 是相对数据独立的，可重复利用性好。</p>
+
+    </article>
+
+    
+        <div class="copyright">
+            
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/03/22/flowsense/">http://www.foxerlee.top/2020/03/22/flowsense/</a>
+                </p>
+            
+            
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+              <li class="page-item prev-link">
+                  <a class="page-link" href="/2020/04/12/poormanBert/"> &laquo; Prev </a>
+              </li>
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2020/02/17/wordcount/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>A manual way to &#34;crawl&#34; your Leetcode solutions | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">A manual way to "crawl" your Leetcode solutions</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Feb 05, 2020</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/crawler/">crawler </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/crawler/">crawler </a>&nbsp;
+            
+                <a href="/tags/%E7%88%AC%E8%99%AB/">爬虫 </a>&nbsp;
+            
+                <a href="/tags/Leetcode/">Leetcode </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">620 Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">3 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <p>Starting in Oct 2019, Leetcode added the recaptcha verification code during login, so it becomes difficult to crawl our own solutions directly using crawler.</p>
+<p>Although there are still some alternative methods, like login emulation to bypass the recaptcha verification, they may be technically difficult to achieve. Here I will introduce a manual way to “crawl” your Leetcode solutions legally.</p>
+<h2 id="Get-our-solved-problems-ID"><a href="#Get-our-solved-problems-ID" class="headerlink" title="Get our solved problems ID"></a>Get our solved problems ID</h2><p>Actually, Leetcode provides an official API about the statuses of whole problems. The API is:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&quot;https://leetcode.com/api/problems/all/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Look at values provided by this API with key <strong>“stat_status_pairs”</strong>. Here is one piece of these values:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;stat&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;question_id&quot;</span>:<span class="number">1467</span>,</span><br><span class="line">        <span class="attr">&quot;question__article__live&quot;</span>:<span class="literal">null</span>,</span><br><span class="line">        <span class="attr">&quot;question__article__slug&quot;</span>:<span class="literal">null</span>,</span><br><span class="line">        <span class="attr">&quot;question__title&quot;</span>:<span class="string">&quot;Number of Transactions per Visit&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;question__title_slug&quot;</span>:<span class="string">&quot;number-of-transactions-per-visit&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;question__hide&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">        <span class="attr">&quot;total_acs&quot;</span>:<span class="number">227</span>,</span><br><span class="line">        <span class="attr">&quot;total_submitted&quot;</span>:<span class="number">431</span>,</span><br><span class="line">        <span class="attr">&quot;frontend_question_id&quot;</span>:<span class="number">1336</span>,</span><br><span class="line">        <span class="attr">&quot;is_new_question&quot;</span>:<span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>:<span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;difficulty&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;level&quot;</span>:<span class="number">3</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;paid_only&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="attr">&quot;is_favor&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">    <span class="attr">&quot;frequency&quot;</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">&quot;progress&quot;</span>:<span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Here is the meaning for some fields:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Name</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">frontend_question_id</td>
+<td align="left">Problem ID</td>
+</tr>
+<tr>
+<td align="center">status</td>
+<td align="left">Whether user finished this problem: ‘ac’ - Accepted, ‘null’ - Not tried</td>
+</tr>
+<tr>
+<td align="center">difficulty</td>
+<td align="left">Problem difficulty: ‘1’ - Easy, ‘2’ - Medium, ‘3’ - Hard</td>
+</tr>
+<tr>
+<td align="center">paid_only</td>
+<td align="left">Premium problem if true</td>
+</tr>
+</tbody></table>
+<p>So we can analyze the fields of the API to get all our solved problems ID. Here are the python code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">user_agent = <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#x27;</span></span><br><span class="line">url = <span class="string">&quot;https://leetcode.com/api/problems/all/&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: user_agent, <span class="string">&#x27;Connection&#x27;</span>: <span class="string">&#x27;keep-alive&#x27;</span>&#125;</span><br><span class="line">resp = session.get(url, headers = headers, timeout = <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">question_list = json.loads(resp.content.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> question <span class="keyword">in</span> question_list[<span class="string">&#x27;stat_status_pairs&#x27;</span>]:</span><br><span class="line">    <span class="keyword">if</span> question[<span class="string">&quot;status&quot;</span>] == <span class="string">&quot;ac&quot;</span>:</span><br><span class="line">    	print(<span class="string">&quot;Solved problems: &#123;&#125;&quot;</span>.format(question[<span class="string">&#x27;stat&#x27;</span>][<span class="string">&quot;frontend_question_id&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<h2 id="Get-solution-code-with-leetcode-cli"><a href="#Get-solution-code-with-leetcode-cli" class="headerlink" title="Get solution code with leetcode-cli"></a>Get solution code with leetcode-cli</h2><p><strong><a target="_blank" rel="noopener" href="https://github.com/skygragon/leetcode-cli">leetcode-cli</a></strong> is a third party cli tool for Leetcode. Using this tool, you can get your soultion code directly.</p>
+<p>You can use <strong>npm</strong> to install leetcode-cli easily. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g leetcode-cli</span><br><span class="line">$ leetcode version</span><br></pre></td></tr></table></figure>
+
+<p>Using command <code>leetcode submission</code>, you can download your former submissions.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ leetcode submission 1</span><br><span class="line">$ [  1 ] Two Sum          1.two-sum.130475090.ac.cpp</span><br></pre></td></tr></table></figure>
+
+<p>Detail installation method and document for leetcode-cli can be find at: <a target="_blank" rel="noopener" href="https://skygragon.github.io/leetcode-cli/install">installation</a>, <a target="_blank" rel="noopener" href="https://skygragon.github.io/leetcode-cli/commands">document</a></p>
+<h2 id="Using-script-to-download-automatically"><a href="#Using-script-to-download-automatically" class="headerlink" title="Using script to download automatically"></a>Using script to download automatically</h2><p>However, if we manually input the command, it is still time-consuming. We can write a bash script to download submissions automatically.</p>
+<p>Make a little change of the original python code to write all commands into <code>get_ac.sh</code> file.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">user_agent = <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#x27;</span></span><br><span class="line">url = <span class="string">&quot;https://leetcode.com/api/problems/all/&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>: user_agent, <span class="string">&#x27;Connection&#x27;</span>: <span class="string">&#x27;keep-alive&#x27;</span>&#125;</span><br><span class="line">resp = session.get(url, headers = headers, timeout = <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">question_list = json.loads(resp.content.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">f = open(<span class="string">&#x27;get_ac.sh&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> question <span class="keyword">in</span> question_list[<span class="string">&#x27;stat_status_pairs&#x27;</span>]:</span><br><span class="line">    <span class="keyword">if</span> question[<span class="string">&quot;status&quot;</span>] == <span class="string">&quot;ac&quot;</span>:</span><br><span class="line">    	str1 = <span class="string">&quot;leetcode submission &#123;&#125; -o submission/ \n&quot;</span>.format(question[<span class="string">&#x27;stat&#x27;</span>][<span class="string">&quot;frontend_question_id&quot;</span>])</span><br><span class="line">    	str2 = <span class="string">&quot;sleep 5s\n&quot;</span></span><br><span class="line">    	f.write(str1)</span><br><span class="line">    	f.write(str2)</span><br><span class="line">f.close()</span><br><span class="line">    	</span><br></pre></td></tr></table></figure>
+
+<p>Then run the bash script:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chomd 777 ./get_ac.sh</span><br><span class="line">$ ./get_ac.sh</span><br></pre></td></tr></table></figure>
+
+<p>Now your can get all your accepted submissions code!</p>
+
+    </article>
+
+    
+        <div class="copyright">
+            
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/02/05/Leetcode-crawler/">http://www.foxerlee.top/2020/02/05/Leetcode-crawler/</a>
+                </p>
+            
+            
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+              <li class="page-item prev-link">
+                  <a class="page-link" href="/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/"> &laquo; Prev </a>
+              </li>
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2020/01/17/%E3%80%8A%E7%AC%AC%E4%B8%89%E5%B8%9D%E5%9B%BD%E7%9A%84%E5%85%B4%E4%BA%A1%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>

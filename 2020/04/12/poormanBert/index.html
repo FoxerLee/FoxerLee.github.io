@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>Poor Man&#39;s BERT 论文笔记 | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">Poor Man's BERT 论文笔记</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Apr 12, 2020</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/%E8%AE%BA%E6%96%87/">论文 </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/Transformer/">Transformer </a>&nbsp;
+            
+                <a href="/tags/BERT/">BERT </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">496 Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">1 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <p>本文采取了 Layer-dropping 的策略，在 pre-trained model 上进行微调，从而实现模型压缩。本文提出的 model 与原始的 BERT、RoBERTa 和 XLNet 相比，可以达到 40% 的减枝效率，同时维持 98% 的准确度。</p>
+<ul>
+<li>代码地址：<a target="_blank" rel="noopener" href="https://github.com/hsajjad/transformers">https://github.com/hsajjad/transformers</a></li>
+<li>论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2004.03844v1.pdf">https://arxiv.org/pdf/2004.03844v1.pdf</a></li>
+</ul>
+<h2 id="Layer-dropping-策略"><a href="#Layer-dropping-策略" class="headerlink" title="Layer-dropping 策略"></a>Layer-dropping 策略</h2><h3 id="删去-Top-Layer"><a href="#删去-Top-Layer" class="headerlink" title="删去 Top-Layer"></a>删去 Top-Layer</h3><p>之前的演讲发现，Top-Layer 更加针对具体的问题，因此文章推测，在进行微调之后，更高的 layers 可能没有那么重要。因此文章尝试删除 top K layers 以减枝 model。</p>
+<h3 id="交替删去-Layers"><a href="#交替删去-Layers" class="headerlink" title="交替删去 Layers"></a>交替删去 Layers</h3><p>文章认为相邻的 layers 所提取的信息可能是相近的，所以做一个交替删除的操作可能不会影响过多准确度。</p>
+<p>每一次的交替删除，文章会尝试两种不同的策略，一个是删除奇数 layers，另一个是删除偶数 layers。在删除之后 layers 之间可能出现的 input 和 output 之间维度不搭配，可以通过微调来恢复。</p>
+<h3 id="贡献程度删去-Layers"><a href="#贡献程度删去-Layers" class="headerlink" title="贡献程度删去 Layers"></a>贡献程度删去 Layers</h3><p>文章提到，首先计算每层的 input 和 output 之间的余弦相似度，如果相似度超过一定阈值，那么说明 output 相比 input 变化不大，应该被删去。</p>
+<h3 id="对称删去-Layers"><a href="#对称删去-Layers" class="headerlink" title="对称删去 Layers"></a>对称删去 Layers</h3><p>文章想测试是否 lower 和 higher 的 layers 会比 middle layers 更加重要，因此尝试在中间删去部分 layers。</p>
+<h3 id="删去-Bottom-Layer"><a href="#删去-Bottom-Layer" class="headerlink" title="删去 Bottom-Layer"></a>删去 Bottom-Layer</h3><p>之前的研究发现，lower layers 更多的是和 words 以及 word pieces 交互，这在 NLP 其实是很重要的，因此不应该删去。文章做这个实验主要是为了保证整体实验的完整性。</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>研究结果发现删去 Top-Layer 总是能够获得较好的效果，而 Bottom-Layer 删去对于准确度损害更大。另外三种方法在不同的 model 上的实验结果显示出了差异性，这与不同 model 的特性有关。</p>
+
+    </article>
+
+    
+        <div class="copyright">
+            
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/04/12/poormanBert/">http://www.foxerlee.top/2020/04/12/poormanBert/</a>
+                </p>
+            
+            
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+              <li class="page-item prev-link">
+                  <a class="page-link" href="/2020/06/02/06-02-2020/"> &laquo; Prev </a>
+              </li>
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2020/03/22/flowsense/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>

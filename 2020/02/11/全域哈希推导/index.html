@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>全域哈希推导 | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">全域哈希推导</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Feb 11, 2020</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/%E7%AE%97%E6%B3%95/">算法 </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/CLRS/">CLRS </a>&nbsp;
+            
+                <a href="/tags/%E7%AE%97%E6%B3%95/">算法 </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">921 Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">3 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <blockquote>
+<p>在 CLRS 上看到了 Chapter 12，讲解了 Hash 相关的内容，其中关于全域哈希（universal hash）和完美哈希（perfect hash）看的不是很懂。后来补了 MIT 的算法导论公开课，稍微弄懂了一些。这里做一个关于全域哈希简单的推导，加强记忆。</p>
+</blockquote>
+<h2 id="普通哈希函数的缺陷"><a href="#普通哈希函数的缺陷" class="headerlink" title="普通哈希函数的缺陷"></a>普通哈希函数的缺陷</h2><p>对于一个给定的哈希函数 $h$ ，存在着一个明显的缺陷：我们总能找到一套特殊的 keys $K$，使得 $K$ 中的 $\forall k \in  K$，其 $h(k)$ 均相等。这样的哈希函数的会导致哈希后的结果回退成一个链表，搜索操作将会是 $O(n)$ 的时间复杂度。</p>
+<p>这样的后果就是，在应用当中你的哈希函数可能会被针对，导致整个算法的效率下降。</p>
+<h2 id="解决方案：全域哈希"><a href="#解决方案：全域哈希" class="headerlink" title="解决方案：全域哈希"></a>解决方案：全域哈希</h2><p>为了解决普通哈希函数的这个缺陷，我们引入了全域哈希算法：即在映射时，我们可以从一个哈希函数集合中，随机地选择哈希函数，当选择函数足够随机时，我们可以保证两个不同的 key 落入同一个桶中，即计算 $h(key)$ 结果相同的概率很低。这个值多低呢？可以小于 $\frac{1}{m}$，$m$ 为桶的个数。</p>
+<p>全域哈希的正式定义是：</p>
+<p>给定 keys 的集合 $U$，哈希函数的集合 $H$，对于 $\forall x,y \in U$，$x \neq y$，$x, y$ 碰撞的概率小于 $\frac{|H|}{m}$，即在 $H$ 中任意选择一个函数，计算 $h(x) = h(y)$ 的概率小于 $\frac{1}{m}$，那么集合 $H$ 为一种全域哈希算法。 </p>
+<h2 id="可行的全域哈希"><a href="#可行的全域哈希" class="headerlink" title="可行的全域哈希"></a>可行的全域哈希</h2><p>定义全域哈希的方法不唯一，这里提供一个 CLRS 上的方法：</p>
+<p>$$<br>H_{pm} = (h_{a,b}(x) = (ax+b) \ mod \ p)  \ mod \ m, 1 \leq a \leq p-1, 0 \leq b \leq p-1<br>$$</p>
+<p>这是一种可行的全域哈希算法，其中 $p$ 是一个比任何 key 都大的质数。</p>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><p>首先我们设 $l, k \in U$，且不失一般性 $k &gt; l$，此时对于 $h_{ab} \in H_{pm}$，会使 $h_{ab}(k) = h_{ab}(l)$。首先我们需要分析是哪一步计算可能导致了相等，即冲突的发生。</p>
+<h3 id="冲突的原因"><a href="#冲突的原因" class="headerlink" title="冲突的原因"></a>冲突的原因</h3><p>显然，因为 $k &gt; l$，所以不可能是 $ak+b$ 与 $al+b$ 相等。那么剩下的可能只有两处，$mod \ p$ 和 $mod \ m$。</p>
+<p>设 $r = (ak+b) \ mod \ p, s = (al+b) \ mod \ p$。假设是在计算了 $mod \ p$ 之后导致了相等，那么 $r = s$，$r - s = 0$，最终就会得到如下的式子：</p>
+<p>$$<br>a(k-l) \ mod \ p = 0<br>$$</p>
+<p>因为 $a \neq 0$，而 $k &gt; l$ 所以也不可能为 0，那么上面的式子不成立，也就不是 $mod \ p$ 导致了相等。而是 $mod \ m$。</p>
+<h3 id="r-s-和-a-b-一一对应"><a href="#r-s-和-a-b-一一对应" class="headerlink" title="(r, s) 和 (a, b) 一一对应"></a>(r, s) 和 (a, b) 一一对应</h3><p>证明这一步的原因是， $(a, b)$ 对实际上是定义了从哈希函数集合 $H$ 中随机选出的一个哈希函数，而前面我们证明了 $(r, s)$ 在求了 $mod \ m$ 后导致了相等，即冲突。那么如果我们能够得到随机选择一组 $(r, s)$ 在求了 $mod \ m$ 后导致了哈希值相等的概率小于 $\frac{1}{m}$，我们也就证明了在 $H$ 中任意选择一个函数，计算 $h(x) = h(y)$ 的概率小于 $\frac{1}{m}$，说明 $H$ 是一个全域哈希集合。</p>
+<p>根据 </p>
+<p>$$<br>r = (ak+b) \ mod \ p<br>$$</p>
+<p>$$<br>s = (al+b) \ mod \ p<br>$$</p>
+<p>我们可以得到</p>
+<p>$$<br>a = ((r-s)((k-l)^{-1} \ mod \ p)) \ mod \ p<br>$$</p>
+<p>$$<br>b = (r - ak) \ mod \ p<br>$$</p>
+<p>因为 $r \neq s$，而 $p$ 比任何 key 都大，我们可以认为 $(r, s)$ 有 $p(p-1)$ 种取法。</p>
+
+    </article>
+
+    
+        <div class="copyright">
+            
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/">http://www.foxerlee.top/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/</a>
+                </p>
+            
+            
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+              <li class="page-item prev-link">
+                  <a class="page-link" href="/2020/02/17/wordcount/"> &laquo; Prev </a>
+              </li>
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2020/02/05/Leetcode-crawler/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>

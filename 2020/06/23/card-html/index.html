@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>CSS 实现鼠标划过卡片上浮效果 | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">CSS 实现鼠标划过卡片上浮效果</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Jun 23, 2020</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/frontend/">frontend </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/css/">css </a>&nbsp;
+            
+                <a href="/tags/frontend/">frontend </a>&nbsp;
+            
+                <a href="/tags/html/">html </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">441 Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">2 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <style type="text/css">
+  /* 核心样式 */
+  .card {
+    padding: 10px;
+    width: 300px;
+    height: 180px;
+    background-color: #FFF;
+    border: none;
+    border-radius: 6px;
+    -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    transition: all 250ms cubic-bezier(.02, .01, .47, 1);
+    display: block;
+      margin:0 auto;
+  }
+
+  .card:hover {
+    box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15);
+    transform: translate(0,-5px);
+    transition-delay: 0s !important;
+  }
+
+  .box-shadow {
+    -webkit-box-shadow: 0 0.25rem 1rem rgba(48, 55, 66, 0.15);
+    box-shadow: 0 4px 16px rgba(48, 55, 66, 0.15);
+  }
+
+  /* 非核心样式 */
+  .card-header {
+    text-align: center;
+  }
+
+  .card-body, .card-footer {
+    text-align: left;
+  }
+</style>
+
+<p>从网上找到的鼠标划过实现卡片上浮的效果，我这里取了其中一种，其他的可参考最后贴出的原文地址。打算把这个用到我的 blog 的 friends 界面，贴一篇 post 当作记录了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="comment">/* 核心样式 */</span></span></span><br><span class="line"><span class="css">  <span class="selector-class">.card</span> &#123;</span></span><br><span class="line">    padding: 10px;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 180px;</span><br><span class="line"><span class="css">    <span class="selector-tag">background-color</span>: <span class="selector-id">#FFF</span>;</span></span><br><span class="line">    border: none;</span><br><span class="line">    border-radius: 6px;</span><br><span class="line"><span class="css">    <span class="selector-tag">-webkit-transition</span>: <span class="selector-tag">all</span> 250<span class="selector-tag">ms</span> <span class="selector-tag">cubic-bezier</span>(0<span class="selector-class">.02</span>, 0<span class="selector-class">.01</span>, 0<span class="selector-class">.47</span>, 1);</span></span><br><span class="line"><span class="css">    <span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 250<span class="selector-tag">ms</span> <span class="selector-tag">cubic-bezier</span>(<span class="selector-class">.02</span>, <span class="selector-class">.01</span>, <span class="selector-class">.47</span>, 1);</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">  <span class="selector-class">.card</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">box-shadow</span>: 0 16<span class="selector-tag">px</span> 32<span class="selector-tag">px</span> 0 <span class="selector-tag">rgba</span>(48, 55, 66, 0<span class="selector-class">.15</span>);</span></span><br><span class="line">    transform: translate(0,-5px);</span><br><span class="line">    transition-delay: 0s !important;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">  <span class="selector-class">.box-shadow</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">-webkit-box-shadow</span>: 0 0<span class="selector-class">.25rem</span> 1<span class="selector-tag">rem</span> <span class="selector-tag">rgba</span>(48, 55, 66, 0<span class="selector-class">.15</span>);</span></span><br><span class="line"><span class="css">    <span class="selector-tag">box-shadow</span>: 0 4<span class="selector-tag">px</span> 16<span class="selector-tag">px</span> <span class="selector-tag">rgba</span>(48, 55, 66, 0<span class="selector-class">.15</span>);</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">  <span class="comment">/* 非核心样式 */</span></span></span><br><span class="line"><span class="css">  <span class="selector-class">.card-header</span> &#123;</span></span><br><span class="line">    text-align: center;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">  <span class="selector-class">.card-body</span>, <span class="selector-class">.card-footer</span> &#123;</span></span><br><span class="line">    text-align: left;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card box-shadow&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-header&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一张卡片<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-body&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>描述：鼠标悬浮时，整张纸抬起的效果<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-footer&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>原理：增加 transform 属性<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<div class="card box-shadow">
+  <div class="card-header">
+    <p>这是一张卡片</p>
+  </div>
+  <div class="card-body">
+    <p>描述：鼠标悬浮时，整张纸抬起的效果</p>
+  </div>
+  <div class="card-footer">
+    <p>原理：增加 transform 属性</p>
+  </div>
+</div>
+
+<p>Reference:</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.wenyuanblog.com/blogs/css-mouse-hover-card-float-effects.html">https://www.wenyuanblog.com/blogs/css-mouse-hover-card-float-effects.html</a></li>
+</ol>
+
+    </article>
+
+    
+        <div class="copyright">
+            
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/06/23/card-html/">http://www.foxerlee.top/2020/06/23/card-html/</a>
+                </p>
+            
+            
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+              <li class="page-item prev-link">
+                  <a class="page-link" href="/2020/07/06/2020-mid/"> &laquo; Prev </a>
+              </li>
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2020/06/02/06-02-2020/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020 
+        </span>
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+  
+
+</body>
+</html>
