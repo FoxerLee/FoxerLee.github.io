@@ -11329,32 +11329,43 @@ a.text-dark:hover, a.text-dark:focus {
 .category .category-post-name {
   font-size: 15px;
 }
+.category .category-post-date {
+  font-size: 15px;
+  float: right;
+}
 .category .category-post-count {
   font-size: 15px;
   float: right;
 }
 .category .category-name {
-  margin-top: 30px;
+  margin-top: 2.2em;
   text-align: center;
 }
 .category .category-more-button {
   margin: 10px auto 0 auto;
   display: block;
-}
-.category .category-more-button .page-link {
-  padding: 0.5em 1.5em;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 .category .category-more-button a {
+  border: none;
   color: #17141f;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
 }
 .category .category-more-button a:hover {
-  background-color: #f9f8fc;
+  transform: scale(1.1, 1.1);
+  background-color: #fff;
   color: #96f;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
+}
+.category .category-more-button .page-link {
+  padding: 0.75em 2.25em;
 }
 .post-title {
   margin-top: 50px;
