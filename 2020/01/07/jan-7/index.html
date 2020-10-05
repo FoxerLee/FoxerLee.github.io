@@ -16,6 +16,10 @@
 <!-- Google Roboto Mono Font -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Gitalk -->
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
 <!-- Mathjax support -->
 <!-- fix mathjax not render inline code -->
 <!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
@@ -32,6 +36,7 @@
 
 <!-- Mathjax file -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 <meta name="generator" content="Hexo 5.2.0"></head>
 <body>
 
@@ -170,6 +175,29 @@
               </li>
           
       </ul>
+
+    
+        <div id="gitalk-container"></div>
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="/js/md5.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: 'FoxerLee.github.io',
+        owner: 'FoxerLee',
+        admin: 'FoxerLee',
+        id: md5('location.pathname'),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render('gitalk-container')
+</script>
+    
   </div>
     </div>
     <footer id="footer" class="footer">
@@ -193,6 +221,8 @@
     <!-- scripts list from theme config.yml -->
     
       <script src="/js/hexo-theme-terran.js"></script>
+    
+      <script src="/js/md5.js"></script>
     
   
 
