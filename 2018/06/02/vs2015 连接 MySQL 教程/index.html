@@ -122,22 +122,22 @@
         <ol>
 <li>首先安装如下两个软件</li>
 </ol>
-<p><img src="1.jpg" alt="1"></p>
+<p><img   class="lazyload" data-src="1.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="1"></p>
 <p>两个软件均选择 <strong>Typical</strong> 安装即可。</p>
 <ol start="2">
 <li>在vs2015中新建一个项目（我这里演示用的C#控制台项目）</li>
 <li>选择NuGet程序包管理器</li>
 </ol>
-<p><img src="NuGet.jpg" alt="NuGet"></p>
+<p><img   class="lazyload" data-src="NuGet.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="NuGet"></p>
 <p>选择 <strong>Package Manager Console</strong>，然后输入如下指令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Install-Package EntityFramework -Version 6.0.0</span><br><span class="line">Install-Package EntityFramework.zh-Hans -Version 6.0.0</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>在自己的项目中，选择 References，然后 <strong>Add Reference</strong>。</li>
 </ol>
-<p><img src="reference.jpg" alt="reference"></p>
+<p><img   class="lazyload" data-src="reference.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="reference"></p>
 <p>然后找到之前安装的 MySQL Connector Net 6.9.9 的下的文件夹 Assemblies（我的在 C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.9\Assemblies），导入文件夹中的所有 .dll 文件。</p>
-<p><img src="2.jpg" alt="2"></p>
+<p><img   class="lazyload" data-src="2.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="2"></p>
 <p>这样就完成了所有配置了。</p>
 <p>可以利用如下的代码测试是否连接成功。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> connString = <span class="string">&quot;server = 127.0.0.1; user id = root; password=password;persistsecurityinfo = True; database = world&quot;</span>;</span><br><span class="line">MySqlConnection conn = <span class="keyword">new</span> MySqlConnection(connString);</span><br><span class="line">conn.Open();</span><br></pre></td></tr></table></figure>
@@ -235,6 +235,8 @@
       <script src="/js/hexo-theme-terran.js"></script>
     
       <script src="/js/md5.js"></script>
+    
+      <script src="/js/lazyLoad.js"></script>
     
   
 
