@@ -1,0 +1,251 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+<title>根据 Star 数爬取 GitHub 仓库 | Terran</title>
+
+  <!-- stylesheets list from _config.yml -->
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+
+<!-- Google Roboto Mono Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Gitalk -->
+
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<!-- Mathjax support -->
+<!-- fix mathjax not render inline code -->
+<!-- https://tex.stackexchange.com/questions/27633/mathjax-inline-mode-not-rendering -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'style', 'textarea', 'figure', 'code', 'highlight']
+        }
+    });
+</script>
+
+<!-- Mathjax file -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- website icon -->
+
+  <link rel="icon" href="/images/logo.jpeg">
+
+
+<!-- Google AdSense-->
+
+  <script data-ad-client="ca-pub-3129494579607503" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+
+  <div id="page">
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" style="margin-left:12px;">Foxerlee&#39;s Journal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="nav navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/">Home</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/category">Categories</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/tag">Tags</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/friends">Friends</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/about">About</a>
+                </li>
+            
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
+                </li>
+            
+        </ul>
+    </div>
+</nav>
+    <div id="main">
+        <div class="container">
+
+    <h2 class="post-title">根据 Star 数爬取 GitHub 仓库</h2>
+    <div class="post-subtitle">
+      <span class="iconfont icon-date1"></span>
+      <span><a href="#">Dec 18, 2020</a></span>&nbsp;
+      
+      <span class="iconfont icon-icon-goodscategory"></span>
+        <span>
+            
+                <a href="/categories/crawler/">crawler </a>
+            
+        </span>&nbsp;
+      
+      
+      <span class="iconfont icon-tags"></span>
+        <span>
+            
+                <a href="/tags/crawler-%E7%88%AC%E8%99%AB-github/">crawler - 爬虫 - github </a>&nbsp;
+            
+        </span>
+      
+      
+          <span class="iconfont icon-post"></span>
+          <span><a href="">1.7k Words</a></span>&nbsp;
+      
+      
+          <span class="post-count">
+          <span class="iconfont icon-time"></span>
+          <a href="">9 min</a></span>&nbsp;
+      
+    </div>
+    <article class="post-content">
+        <p>首先导入需要使用到的包，并且设定 <code>headers</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后是确定要爬取的界面。在 GitHub 的 search 界面可以根据 star 数量排序，并且跳到下一页只需要修改 <code>url</code> 的参数，比较方便，我们就用这个界面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 参数解释</span></span><br><span class="line"><span class="comment"># o=desc 默认就好，不用动</span></span><br><span class="line"><span class="comment"># p=1 指第几页，从 1 开始</span></span><br><span class="line"><span class="comment"># q=awesome 指你想爬取的 topic，也就是你在网页上的搜索框输入的内容</span></span><br><span class="line"><span class="comment"># s=stars 按照 star 数量排序</span></span><br><span class="line"><span class="comment"># type=Repositories 默认的，不用改</span></span><br><span class="line">url = <span class="string">&#x27;https://github.com/search?o=desc&amp;p=1&amp;q=awesome&amp;s=stars&amp;type=Repositories&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>获得了 <code>url</code> 之后，就可以使用 <code>requests</code> 包获取该页面的内容，再用 <code>BeautifulSoup</code> 解析获得的 <code>html</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(url, headers=headers)</span><br><span class="line"></span><br><span class="line">text = r.text</span><br><span class="line">soup = BeautifulSoup(text, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>所有的 repo 结果可以通过如下的方式获得：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">divs = soup.find_all(<span class="string">&#x27;li&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;repo-list-item&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>每一个 <code>li</code> 的内容大致如下：</p>
+<details>
+<summary><mark>具体内容</mark></summary>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;repo-list-item hx_hit-repo d-flex flex-justify-start py-4 public source&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-shrink-0 mr-2&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">aria-hidden</span>=<span class="string">&quot;true&quot;</span> <span class="attr">class</span>=<span class="string">&quot;octicon octicon-repo&quot;</span> <span class="attr">height</span>=<span class="string">&quot;16&quot;</span> <span class="attr">style</span>=<span class="string">&quot;color: #6a737d&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.1&quot;</span> <span class="attr">viewbox</span>=<span class="string">&quot;0 0 16 16&quot;</span> <span class="attr">width</span>=<span class="string">&quot;16&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z&quot;</span> <span class="attr">fill-rule</span>=<span class="string">&quot;evenodd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mt-n1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;f4 text-normal&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;v-align-middle&quot;</span> <span class="attr">data-hydro-click</span>=<span class="string">&#x27;&#123;&quot;event_type&quot;:&quot;search_result.click&quot;,&quot;payload&quot;:&#123;&quot;page_number&quot;:1,&quot;per_page&quot;:10,&quot;query&quot;:&quot;hexo-theme&quot;,&quot;result_position&quot;:1,&quot;click_id&quot;:27382163,&quot;result&quot;:&#123;&quot;id&quot;:27382163,&quot;global_relay_id&quot;:&quot;MDEwOlJlcG9zaXRvcnkyNzM4MjE2Mw==&quot;,&quot;model_name&quot;:&quot;Repository&quot;,&quot;url&quot;:&quot;https://github.com/iissnan/hexo-theme-next&quot;&#125;,&quot;originating_url&quot;:&quot;https://github.com/search?o=desc<span class="symbol">&amp;amp;</span>p=1<span class="symbol">&amp;amp;</span>q=hexo-theme<span class="symbol">&amp;amp;</span>s=stars<span class="symbol">&amp;amp;</span>type=Repositories&quot;,&quot;user_id&quot;:null&#125;&#125;&#x27;</span> <span class="attr">data-hydro-click-hmac</span>=<span class="string">&quot;4cdbb1080b21ad10efa139f75b480b485dcaea70d396e8fc019a635810413303&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/iissnan/hexo-theme-next&quot;</span>&gt;</span>iissnan/<span class="tag">&lt;<span class="name">em</span>&gt;</span>hexo<span class="tag">&lt;/<span class="name">em</span>&gt;</span>-<span class="tag">&lt;<span class="name">em</span>&gt;</span>theme<span class="tag">&lt;/<span class="name">em</span>&gt;</span>-next<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;mb-1&quot;</span>&gt;</span></span><br><span class="line">        Elegant <span class="tag">&lt;<span class="name">em</span>&gt;</span>theme<span class="tag">&lt;/<span class="name">em</span>&gt;</span> for <span class="tag">&lt;<span class="name">em</span>&gt;</span>Hexo<span class="tag">&lt;/<span class="name">em</span>&gt;</span>.</span><br><span class="line">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;topic-tag topic-tag-link f6 px-2 mx-0&quot;</span> <span class="attr">data-ga-click</span>=<span class="string">&quot;Topic, search results&quot;</span> <span class="attr">data-octo-click</span>=<span class="string">&quot;topic_click&quot;</span> <span class="attr">data-octo-dimensions</span>=<span class="string">&quot;topic:hexo-theme,repository_id:27382163,repository_nwo:iissnan/<span class="symbol">&amp;lt;</span>em<span class="symbol">&amp;gt;</span>hexo<span class="symbol">&amp;lt;</span>/em<span class="symbol">&amp;gt;</span>-<span class="symbol">&amp;lt;</span>em<span class="symbol">&amp;gt;</span>theme<span class="symbol">&amp;lt;</span>/em<span class="symbol">&amp;gt;</span>-next,repository_public:true,repository_is_fork:false&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/topics/hexo-theme&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Topic: hexo-theme&quot;</span>&gt;</span></span><br><span class="line">  hexo-theme</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;topic-tag topic-tag-link f6 px-2 mx-0&quot;</span> <span class="attr">data-ga-click</span>=<span class="string">&quot;Topic, search results&quot;</span> <span class="attr">data-octo-click</span>=<span class="string">&quot;topic_click&quot;</span> <span class="attr">data-octo-dimensions</span>=<span class="string">&quot;topic:hexo,repository_id:27382163,repository_nwo:iissnan/<span class="symbol">&amp;lt;</span>em<span class="symbol">&amp;gt;</span>hexo<span class="symbol">&amp;lt;</span>/em<span class="symbol">&amp;gt;</span>-<span class="symbol">&amp;lt;</span>em<span class="symbol">&amp;gt;</span>theme<span class="symbol">&amp;lt;</span>/em<span class="symbol">&amp;gt;</span>-next,repository_public:true,repository_is_fork:false&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/topics/hexo&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Topic: hexo&quot;</span>&gt;</span></span><br><span class="line">  hexo</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;topic-tag topic-tag-link f6 px-2 mx-0&quot;</span> <span class="attr">data-ga-click</span>=<span class="string">&quot;Topic, search results&quot;</span> <span class="attr">data-octo-click</span>=<span class="string">&quot;topic_click&quot;</span> <span class="attr">data-octo-dimensions</span>=<span class="string">&quot;topic:theme-next,repository_id:27382163,repository_nwo:iissnan/<span class="symbol">&amp;lt;</span>em<span class="symbol">&amp;gt;</span>hexo<span class="symbol">&amp;lt;</span>/em<span class="symbol">&amp;gt;</span>-<span class="symbol">&amp;lt;</span>em<span class="symbol">&amp;gt;</span>theme<span class="symbol">&amp;lt;</span>/em<span class="symbol">&amp;gt;</span>-next,repository_public:true,repository_is_fork:false&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/topics/theme-next&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Topic: theme-next&quot;</span>&gt;</span></span><br><span class="line">  theme-next</span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;d-flex flex-wrap text-small text-gray&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mr-3&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;muted-link&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/iissnan/hexo-theme-next/stargazers&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">aria-label</span>=<span class="string">&quot;star&quot;</span> <span class="attr">class</span>=<span class="string">&quot;octicon octicon-star&quot;</span> <span class="attr">height</span>=<span class="string">&quot;16&quot;</span> <span class="attr">role</span>=<span class="string">&quot;img&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.1&quot;</span> <span class="attr">viewbox</span>=<span class="string">&quot;0 0 16 16&quot;</span> <span class="attr">width</span>=<span class="string">&quot;16&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z&quot;</span> <span class="attr">fill-rule</span>=<span class="string">&quot;evenodd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">              15.5k</span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mr-3&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;repo-language-color&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #563d7c&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">itemprop</span>=<span class="string">&quot;programmingLanguage&quot;</span>&gt;</span>CSS<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mr-3&quot;</span>&gt;</span></span><br><span class="line">            MIT license</span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mr-3&quot;</span>&gt;</span></span><br><span class="line">            Updated <span class="tag">&lt;<span class="name">relative-time</span> <span class="attr">class</span>=<span class="string">&quot;no-wrap&quot;</span> <span class="attr">datetime</span>=<span class="string">&quot;2020-04-02T06:25:26Z&quot;</span>&gt;</span>Apr 2, 2020<span class="tag">&lt;/<span class="name">relative-time</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;muted-link f6&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/iissnan/hexo-theme-next/issues?q=label%3A%22Help+wanted%22+is%3Aissue+is%3Aopen&quot;</span>&gt;</span></span><br><span class="line">              2 issues</span><br><span class="line">              need help</span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</details>
+
+<p>查看 <code>html</code> 代码就可以找到各个部分，如名字、链接、 star 数等等，比如说如下的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> divs:</span><br><span class="line">    star = d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;muted-link&#x27;</span>&#125;).text.strip()</span><br><span class="line">    <span class="comment"># print(star)</span></span><br><span class="line"></span><br><span class="line">    desc = d.find(<span class="string">&#x27;p&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;mb-1&#x27;</span>&#125;).text.strip()</span><br><span class="line">    <span class="comment"># print(desc)</span></span><br><span class="line"></span><br><span class="line">    name = d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;v-align-middle&#x27;</span>&#125;).text.strip()</span><br><span class="line">    <span class="comment"># print(name)</span></span><br><span class="line"></span><br><span class="line">    href = <span class="string">&#x27;https://www.github.com&#x27;</span> +  d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;v-align-middle&#x27;</span>&#125;)[<span class="string">&#x27;href&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这样就能根据 star 排序爬取某个 topic 的仓库了。如果想用其他的排序或者内容，修改排序参数即可。具体参数可以直接去 search 界面尝试。</p>
+<p>完整代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">30</span>):</span><br><span class="line">    url = <span class="string">&#x27;https://github.com/search?o=desc&amp;p=&#x27;</span> + str(i) + <span class="string">&#x27;&amp;q=hexo-theme&amp;s=stars&amp;type=Repositories&#x27;</span></span><br><span class="line">    r = requests.get(url, headers=headers)</span><br><span class="line">    </span><br><span class="line">    text = r.text</span><br><span class="line">    soup = BeautifulSoup(text, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line"></span><br><span class="line">    divs = soup.find_all(<span class="string">&#x27;li&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;repo-list-item&#x27;</span>&#125;)</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> divs:</span><br><span class="line">        print(d)</span><br><span class="line">        star = d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;muted-link&#x27;</span>&#125;).text.strip()</span><br><span class="line">        <span class="comment"># print(star)</span></span><br><span class="line"></span><br><span class="line">        desc = d.find(<span class="string">&#x27;p&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;mb-1&#x27;</span>&#125;).text.strip()</span><br><span class="line">        <span class="comment"># print(desc)</span></span><br><span class="line"></span><br><span class="line">        name = d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;v-align-middle&#x27;</span>&#125;).text.strip()</span><br><span class="line">        <span class="comment"># print(name)</span></span><br><span class="line"></span><br><span class="line">        href = <span class="string">&#x27;https://www.github.com&#x27;</span> +  d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;v-align-middle&#x27;</span>&#125;)[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">    print(<span class="string">&#x27;finish page &#123;&#125;&#x27;</span>.format(i))</span><br></pre></td></tr></table></figure>
+    </article>
+
+    
+        <div class="copyright">
+            
+                <div style="overflow-x: auto;white-space:nowrap;">
+                <p>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/12/18/github-crawler/">http://www.foxerlee.top/2020/12/18/github-crawler/</a>
+                </p>
+                </div>
+            
+            
+                <div style="overflow-x: auto;white-space:nowrap;">
+                <p>
+                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                </p>
+                </div>
+            
+            
+                <p>
+                    <strong>Signature:</strong> stay hungry, stay foolish
+                </p>
+            
+        </div>
+    
+
+    <ul class="pagination">
+          
+          
+              <li class="page-item next-link">
+                  <a class="page-link" href="/2020/09/11/CA-hotel/"> Next &raquo; </a>
+              </li>
+          
+      </ul>
+
+    
+        <div id="gitalk-container"></div>
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="/js/md5.js"></script>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '6968fc2a38afe02cdc2b',
+        clientSecret: '263a79f392296d083082a5a667d71df31ed413a8',
+        repo: 'FoxerLee.github.io',
+        owner: 'FoxerLee',
+        admin: 'FoxerLee',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render('gitalk-container')
+</script>
+    
+  </div>
+    </div>
+    <footer id="footer" class="footer">
+    <div>
+        <span>
+            Foxerlee © 
+                2017 - 
+                2020  
+        </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+</footer>
+  </div>
+
+
+  
+    <!-- scripts list from theme config.yml -->
+    
+      <script src="/js/hexo-theme-terran.js"></script>
+    
+      <script src="/js/md5.js"></script>
+    
+      <script src="/js/lazyLoad.js"></script>
+    
+  
+
+</body>
+</html>
