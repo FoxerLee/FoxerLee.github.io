@@ -90,7 +90,7 @@
         <div class="container archive">
     <h1 class="archive-title">Archives</h1>
     <div class="archive-subtitle">
-        <span class="iconfont icon-post archive-icon"></span> 22 Posts
+        <span class="iconfont icon-post archive-icon"></span> 23 Posts
     </div>
 
     
@@ -99,6 +99,36 @@
 
         
             <h4 class="archive-date">Feb, 2020</h4>
+        
+
+        <!-- <li class="archive-post">
+            <a class="archive-post-link" href="/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/">
+                <span class="archive-post-title">全域哈希推导</span>
+                <span class="archive-post-date">Feb 11, 2020</span>
+            </a>
+        </li> -->
+
+        <div class="archive-post">
+            <h4 class="archive-post-title">
+                <a href="/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/">全域哈希推导</a>
+            </h4>
+            <p>
+                
+                    
+在 CLRS 上看到了 Chapter 12，讲解了 Hash 相关的内容，其中关于全域哈希（universal hash）和完美哈希（perfect hash）看的不是很懂。后来补了 MIT 的算法导论公开课，稍微弄懂了一些。这里做一个关于全域哈希简单的推导，加强记忆。
+
+普通哈希函数的缺陷对于一个给定的哈希函数 $h$ ，存在着一个明显的缺陷：我们总能找到一套特殊的 keys $K$，使得 $K$ 中的 $\forall k \in  K$，其 $h(k)$ 均相等。这样的哈希函数的会导致
+                
+            </p>
+            <span class="archive-post-date">Feb 11, 2020</span>
+            <a href="/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/">
+                <span class="archive-more iconfont icon-post"></span>
+            </a>
+        </div>
+
+    
+        
+
         
 
         <!-- <li class="archive-post">
@@ -412,47 +442,6 @@ Although there are still some alternative methods, like login emulation to bypas
         </div>
 
     
-        
-
-        
-
-        <!-- <li class="archive-post">
-            <a class="archive-post-link" href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">
-                <span class="archive-post-title">vs2015 连接 MySQL 教程</span>
-                <span class="archive-post-date">Jun 02, 2018</span>
-            </a>
-        </li> -->
-
-        <div class="archive-post">
-            <h4 class="archive-post-title">
-                <a href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">vs2015 连接 MySQL 教程</a>
-            </h4>
-            <p>
-                
-                    
-首先安装如下两个软件
-
-
-两个软件均选择 Typical 安装即可。
-
-在vs2015中新建一个项目（我这里演示用的C#控制台项目）
-选择NuGet程序包管理器
-
-
-选择 Package Manager Console，然后输入如下指令
-12Install-Package EntityFramework -Version 6.0.0Install-Package EntityFramework.zh-Hans -Version 6.0.0
-
-
-在自己的项目中，选择 References，然后 
-                
-            </p>
-            <span class="archive-post-date">Jun 02, 2018</span>
-            <a href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">
-                <span class="archive-more iconfont icon-post"></span>
-            </a>
-        </div>
-
-    
     
     <ul class="pagination">
         
@@ -475,7 +464,7 @@ Although there are still some alternative methods, like login emulation to bypas
         <span>
             Foxerlee © 
                 2017 - 
-                2020  
+                2021  
         </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">

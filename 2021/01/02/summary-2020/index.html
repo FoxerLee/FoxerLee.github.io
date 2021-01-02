@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
 
-<title>vs2015 连接 MySQL 教程 | Terran</title>
+<title>2020，我想明白了什么？ | Terran</title>
 
   <!-- stylesheets list from _config.yml -->
   
@@ -91,15 +91,15 @@
     <div id="main">
         <div class="container">
 
-    <h2 class="post-title">vs2015 连接 MySQL 教程</h2>
+    <h2 class="post-title">2020，我想明白了什么？</h2>
     <div class="post-subtitle">
       <span class="iconfont icon-date1"></span>
-      <span><a href="#">Jun 02, 2018</a></span>&nbsp;
+      <span><a href="#">Jan 02, 2021</a></span>&nbsp;
       
       <span class="iconfont icon-icon-goodscategory"></span>
         <span>
             
-                <a href="/categories/%E6%95%99%E7%A8%8B/">教程 </a>
+                <a href="/categories/%E9%9A%8F%E7%AC%94/">随笔 </a>
             
         </span>&nbsp;
       
@@ -107,52 +107,30 @@
       <span class="iconfont icon-tags"></span>
         <span>
             
-                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>&nbsp;
-            
-                <a href="/tags/MySQL/">MySQL </a>&nbsp;
+                <a href="/tags/%E9%9A%8F%E7%AC%94/">随笔 </a>&nbsp;
             
         </span>
       
       
           <span class="iconfont icon-post"></span>
-          <span><a href="">209 Words</a></span>&nbsp;
+          <span><a href="">1.3k Words</a></span>&nbsp;
       
       
           <span class="post-count">
           <span class="iconfont icon-time"></span>
-          <a href="">1 min</a></span>&nbsp;
+          <a href="">4 min</a></span>&nbsp;
       
     </div>
     <article class="post-content">
-        <ol>
-<li>首先安装如下两个软件</li>
-</ol>
-<p><img   class="lazyload" data-src="1.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="1"></p>
-<p>两个软件均选择 <strong>Typical</strong> 安装即可。</p>
-<ol start="2">
-<li>在vs2015中新建一个项目（我这里演示用的C#控制台项目）</li>
-<li>选择NuGet程序包管理器</li>
-</ol>
-<p><img   class="lazyload" data-src="NuGet.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="NuGet"></p>
-<p>选择 <strong>Package Manager Console</strong>，然后输入如下指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Install-Package EntityFramework -Version 6.0.0</span><br><span class="line">Install-Package EntityFramework.zh-Hans -Version 6.0.0</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>在自己的项目中，选择 References，然后 <strong>Add Reference</strong>。</li>
-</ol>
-<p><img   class="lazyload" data-src="reference.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="reference"></p>
-<p>然后找到之前安装的 MySQL Connector Net 6.9.9 的下的文件夹 Assemblies（我的在 C:\Program Files (x86)\MySQL\MySQL Connector Net 6.9.9\Assemblies），导入文件夹中的所有 .dll 文件。</p>
-<p><img   class="lazyload" data-src="2.jpg" src="https://cdn.jsdelivr.net/npm/skx@0.0.9/img/lazy.gif"  alt="2"></p>
-<p>这样就完成了所有配置了。</p>
-<p>可以利用如下的代码测试是否连接成功。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> connString = <span class="string">&quot;server = 127.0.0.1; user id = root; password=password;persistsecurityinfo = True; database = world&quot;</span>;</span><br><span class="line">MySqlConnection conn = <span class="keyword">new</span> MySqlConnection(connString);</span><br><span class="line">conn.Open();</span><br></pre></td></tr></table></figure>
-
-<br/>
-
-<p>参考教程</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/memgxingfeixiang/article/details/76602318">https://blog.csdn.net/memgxingfeixiang/article/details/76602318</a></li>
-</ul>
+        <p>终于，2020 年过去了。回看这一年，我收获了什么呢？日复一日宅在家里，屈指可数的出门次数，一个还没有确定的工作，以及越来越懒散的身心。</p>
+<p>长期的自闭生活，让我对于之前的一些事情有了更多的理解，我逐渐明白了，从某种意义上我不是真的喜欢某个人，我在意的是那种人生赢家的感觉，我更在意的是我可不可以和一群朋友玩。可能是和原生家庭的关系，小时候的我家教比较严，没有什么出去玩的机会。到了大学有了自由之后，我会更渴望那种一群人打打闹闹、嘻嘻哈哈的感觉。比起做出什么厉害的事情，拥有什么牛逼的成就，我只是想和一群朋友开开心心地做一些没有意义、只是快乐的事情。其实能有一群“蠢”朋友一起做一些无聊的事情真的是非常的幸福，现在还有多少人只是为了单纯的快乐去做一件事的，我真的好羡慕那些能有一群人陪自己犯傻的故事。</p>
+<p>也是为了博得一份关注，本科心智还不成熟的我总是喜欢搞一些奇奇怪怪的事情。讲一些不着边际的话呀，干一些不着边际的事情呀。等到后面自己意识到这一点，想改吧，有一些行为话语已经成了习惯，而且朋友间也留下了关于我的印象。我真的真的真的很反感，乃至厌恶我被带上讲话、行动不着边际（以及类似的？）的标签，虽然也知道自己确实有些时候会有一点这样的行为，但是现在我已经会很刻意回避了（以至于现在讲话时不时会结巴一下，就是我的脑子在和我的语言打架，控制自己脱口而出一些话）。</p>
+<p>2020 年也是社交缺失的一年。今年我新认识的人几乎为 0。基本上只是几个之前的同学渐渐熟悉而已。拜疫情所赐吧，今年出门的时间可能不超过 30 天，上课也全是线上，没有任何扩宽社交面的机会。年初的时候，也想过趁着玩 boardgame 的氛围，在 Reddit 上认识一些老外，融入一下美国的圈子，当然后面一切都不可能了哈哈。想到今年毕业后，朋友回国的回国，去加州的去加州，在纽约好像就只剩下我一个人，住 studio 连说话的人都没有，不知道 2021 年之后我会不会就不会说话了哈哈。</p>
+<p>说到工作，之前博士的朋友说羡慕我有个还不错的工作，能住在 studio，算是“财富自由的精彩人生”。可是我自己却觉得，真的有那么好吗？人毕竟是群居动物，需要和其他人交流的。虽然可能不用 996，拿到的工资还不错，但是却没地方花，空闲的时间也只是坐在电脑前发呆，甚至可能上班也只能和同事通过网络远程联系，想想其实挺恐怖的。如果哪天我一个人在家摔了一跤，死在家里都不会有人知道。如果疫情不见好转（大概也不会好转了），我可能 2022 年就回回国吧，但即便是回国，我又能做什么呢？</p>
+<p>以及最迷茫的一点是，我究竟为了什么活着？从实习结束（其实实习的时候也很闲），我基本上就是每天熬到 1-2 点再睡觉，早上醒了后懒在床上用手机刷直播，直到饿了才起床去做午饭。到后来午饭也随便做做了。下午和晚上也没有看书和学习的欲望，睡个午觉，再玩会儿游戏，晚上泡个澡，一天便这样过去了。这是我 9 月时候写下的我的日常，现在还是如此。朋友说我是“卷王”，我觉得不然。这对于我是因为缺乏交流和动力吧。没有什么人可以聊天，所以会无聊，也就会想东想西；而现在的我处于一个迷茫期，当有了工作之后，不知道下一步的计划是什么，我到底想要什么？曾经说想读博士，其实只是不想做一个朝九晚五的上班族，想天天烂在家里，当一个宅男。其实也不是想，只是因为没有目标了吧。</p>
+<p>2020 年，我想明白了一些事情：我知道了自己 3 年的心结到底是什么，自己性格上的问题。但我还是没想明白，我究竟想要什么？宅得越久，也就愈加自闭，自卑。或许也不会想明白了。</p>
+<p>Jan 2, 2021</p>
+<p>于 Brooklyn, New York</p>
 
     </article>
 
@@ -161,7 +139,7 @@
             
                 <div style="overflow-x: auto;white-space:nowrap;">
                 <p>
-                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">http://www.foxerlee.top/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/</a>
+                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2021/01/02/summary-2020/">http://www.foxerlee.top/2021/01/02/summary-2020/</a>
                 </p>
                 </div>
             
@@ -182,13 +160,9 @@
 
     <ul class="pagination">
           
-              <li class="page-item prev-link">
-                  <a class="page-link" href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/"> &laquo; Prev </a>
-              </li>
-          
           
               <li class="page-item next-link">
-                  <a class="page-link" href="/2018/04/21/%E5%BE%AE%E8%BD%AF%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8C%97/"> Next &raquo; </a>
+                  <a class="page-link" href="/2020/12/18/github-crawler/"> Next &raquo; </a>
               </li>
           
       </ul>
