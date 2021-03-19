@@ -90,7 +90,7 @@
         <div class="container archive">
     <h1 class="archive-title">Archives</h1>
     <div class="archive-subtitle">
-        <span class="iconfont icon-post archive-icon"></span> 23 Posts
+        <span class="iconfont icon-post archive-icon"></span> 24 Posts
     </div>
 
     
@@ -99,6 +99,39 @@
 
         
             <h4 class="archive-date">Feb, 2020</h4>
+        
+
+        <!-- <li class="archive-post">
+            <a class="archive-post-link" href="/2020/02/17/wordcount/">
+                <span class="archive-post-title">Hexo 添加文章字数和阅读时长</span>
+                <span class="archive-post-date">Feb 17, 2020</span>
+            </a>
+        </li> -->
+
+        <div class="archive-post">
+            <h4 class="archive-post-title">
+                <a href="/2020/02/17/wordcount/">Hexo 添加文章字数和阅读时长</a>
+            </h4>
+            <p>
+                
+                    安装文章字数和阅读时长的统计都是借助 hexo-wordcount 插件实现，可以使用 npm 或者 yarn 安装：
+123yarn add hexo-wordcount# ornpm i --save hexo-wordcount
+Node 版本在 7.6.0 之前，请安装 2.x 版本：
+1npm i --save hexo-wordcount@2
+
+配置在主题的配置文件 _config.yml 中添加如下 hexo-wordcount 插件的配置说明：
+1234567# Post wor
+                
+            </p>
+            <span class="archive-post-date">Feb 17, 2020</span>
+            <a href="/2020/02/17/wordcount/">
+                <span class="archive-more iconfont icon-post"></span>
+            </a>
+        </div>
+
+    
+        
+
         
 
         <!-- <li class="archive-post">
@@ -404,39 +437,6 @@ Although there are still some alternative methods, like login emulation to bypas
             </p>
             <span class="archive-post-date">Mar 14, 2019</span>
             <a href="/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/">
-                <span class="archive-more iconfont icon-post"></span>
-            </a>
-        </div>
-
-    
-        
-
-        
-            <h4 class="archive-date">Jun, 2018</h4>
-        
-
-        <!-- <li class="archive-post">
-            <a class="archive-post-link" href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">
-                <span class="archive-post-title">Cassandra 3.11.2 单节点配置教程</span>
-                <span class="archive-post-date">Jun 18, 2018</span>
-            </a>
-        </li> -->
-
-        <div class="archive-post">
-            <h4 class="archive-post-title">
-                <a href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">Cassandra 3.11.2 单节点配置教程</a>
-            </h4>
-            <p>
-                
-                    Cassandra 配置先决环境测试的系统环境为 Ubuntu 14.04 LTS
-安装 Cassandra 需要首先安装 Java 8 环境，Oracle Java Standard Edition 8 或者 OpenJDK 8 均可。OpenJDK 8 的安装方法如下：
-123$ sudo apt-get update$ sudo apt-get install openjdk-8-jdk$ sudo apt-get install openjdk-8-jre
-
-如果想使用 cqlsh，需要
-                
-            </p>
-            <span class="archive-post-date">Jun 18, 2018</span>
-            <a href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">
                 <span class="archive-more iconfont icon-post"></span>
             </a>
         </div>
