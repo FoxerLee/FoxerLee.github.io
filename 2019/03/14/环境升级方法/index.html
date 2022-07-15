@@ -16,6 +16,8 @@
 <!-- Google Roboto Mono Font -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Crimson Text | Google Open Sans -->
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:300,800" rel="stylesheet">
 <!-- Gitalk -->
 
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -62,7 +64,7 @@
                 </li>
             
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archive</a>
                 </li>
             
                 <li class="nav-item">
@@ -82,6 +84,10 @@
                 </li>
             
                 <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/albums">Albums</a>
+                </li>
+            
+                <li class="nav-item">
                     <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
                 </li>
             
@@ -89,40 +95,41 @@
     </div>
 </nav>
     <div id="main">
-        <div class="container">
+        
+    <div class="container">
 
-    <h2 class="post-title">在 Linux 下升级 R 环境</h2>
-    <div class="post-subtitle">
-      <span class="iconfont icon-date1"></span>
-      <span><a href="#">Mar 14, 2019</a></span>&nbsp;
-      
-      <span class="iconfont icon-icon-goodscategory"></span>
-        <span>
-            
-                <a href="/categories/%E6%95%99%E7%A8%8B/">教程 </a>
-            
-        </span>&nbsp;
-      
-      
-      <span class="iconfont icon-tags"></span>
-        <span>
-            
-                <a href="/tags/R/">R </a>&nbsp;
-            
-        </span>
-      
-      
-          <span class="iconfont icon-post"></span>
-          <span><a href="">326 Words</a></span>&nbsp;
-      
-      
-          <span class="post-count">
-          <span class="iconfont icon-time"></span>
-          <a href="">1 min</a></span>&nbsp;
-      
-    </div>
-    <article class="post-content">
-        <p>默认的 Linux 环境下使用<code>apt-get</code>安装的 R 环境的版本普遍偏低，如 Ubuntu 16.04 默认安装的 R 环境版本是<code>3.2.3</code>，很多包就不能用。这里记录一下在 Ubuntu 中自定义升级 R 环境到特定版本的方法。</p>
+        <h2 class="post-title">在 Linux 下升级 R 环境</h2>
+        <div class="post-subtitle">
+        <span class="iconfont icon-date1"></span>
+        <span><a href="#">Mar 14, 2019</a></span>&nbsp;
+        
+        <span class="iconfont icon-icon-goodscategory"></span>
+            <span>
+                
+                    <a href="/categories/%E6%95%99%E7%A8%8B/">教程 </a>
+                
+            </span>&nbsp;
+        
+        
+        <span class="iconfont icon-tags"></span>
+            <span>
+                
+                    <a href="/tags/R/">R </a>&nbsp;
+                
+            </span>
+        
+        
+            <span class="iconfont icon-post"></span>
+            <span><a href="">326 Words</a></span>&nbsp;
+        
+        
+            <span class="post-count">
+            <span class="iconfont icon-time"></span>
+            <a href="">1 min</a></span>&nbsp;
+        
+        </div>
+        <article class="post-content">
+            <p>默认的 Linux 环境下使用<code>apt-get</code>安装的 R 环境的版本普遍偏低，如 Ubuntu 16.04 默认安装的 R 环境版本是<code>3.2.3</code>，很多包就不能用。这里记录一下在 Ubuntu 中自定义升级 R 环境到特定版本的方法。</p>
 <h3 id="1-添加指定的-CRAN-源"><a href="#1-添加指定的-CRAN-源" class="headerlink" title="1. 添加指定的 CRAN 源"></a>1. 添加指定的 CRAN 源</h3><p>首先打开 Ubuntu 的软件源文件，加入对应的 CRAN 源：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br><span class="line"><span class="comment">## 升级到 R 环境 3.5.x 的最新版本(Ubuntu 16.04 下)</span></span><br><span class="line">deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/</span><br><span class="line"><span class="comment">## 升级到 R 环境 3.4.x 的最新版本(Ubuntu 16.04 下)</span></span><br><span class="line">deb https://cloud.r-project.org/bin/linux/ubuntu xenial/</span><br></pre></td></tr></table></figure>
 
@@ -147,60 +154,60 @@
 <li><a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/linux/ubuntu/">https://cran.r-project.org/bin/linux/ubuntu/</a></li>
 </ol>
 
-    </article>
+        </article>
 
-    
-        <div class="copyright">
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/">http://www.foxerlee.top/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/</a>
-                </p>
-                </div>
-            
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
-                </p>
-                </div>
-            
-            
-                <p>
-                    <strong>Signature:</strong> stay hungry, stay foolish
-                </p>
-            
-        </div>
-    
+        
+            <div class="copyright">
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/">http://www.foxerlee.top/2019/03/14/%E7%8E%AF%E5%A2%83%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95/</a>
+                    </p>
+                    </div>
+                
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                    </p>
+                    </div>
+                
+                
+                    <p>
+                        <strong>Signature:</strong> stay hungry, stay foolish
+                    </p>
+                
+            </div>
+        
 
-    <ul class="pagination">
-          
-              <li class="page-item prev-link">
-                  <a class="page-link" href="/2019/05/01/%E5%8D%97%E4%BA%AC%E8%A1%8C%E5%90%8E%E7%9A%84%E6%9D%82%E6%83%B3/"> &laquo; Prev </a>
-              </li>
-          
-          
-              <li class="page-item next-link">
-                  <a class="page-link" href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/"> Next &raquo; </a>
-              </li>
-          
-      </ul>
-    
-    
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- hor -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-3129494579607503"
-            data-ad-slot="2940693228"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    
-    
-        <div id="gitalk-container"></div>
+        <ul class="pagination">
+            
+                <li class="page-item prev-link">
+                    <a class="page-link" href="/2019/05/01/%E5%8D%97%E4%BA%AC%E8%A1%8C%E5%90%8E%E7%9A%84%E6%9D%82%E6%83%B3/"> &laquo; Prev </a>
+                </li>
+            
+            
+                <li class="page-item next-link">
+                    <a class="page-link" href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/"> Next &raquo; </a>
+                </li>
+            
+        </ul>
+        
+        
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- hor -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3129494579607503"
+                data-ad-slot="2940693228"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        
+        
+            <div id="gitalk-container"></div>
 
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="/js/md5.js"></script>
@@ -220,15 +227,17 @@
       })
       gitalk.render('gitalk-container')
 </script>
-    
-  </div>
+        
+    </div>
+
+
     </div>
     <footer id="footer" class="footer">
     <div>
         <span>
             Foxerlee © 
                 2017 - 
-                2021  
+                2022  
         </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">

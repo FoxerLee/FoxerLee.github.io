@@ -16,6 +16,8 @@
 <!-- Google Roboto Mono Font -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Crimson Text | Google Open Sans -->
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:300,800" rel="stylesheet">
 <!-- Gitalk -->
 
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -62,7 +64,7 @@
                 </li>
             
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archive</a>
                 </li>
             
                 <li class="nav-item">
@@ -82,6 +84,10 @@
                 </li>
             
                 <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/albums">Albums</a>
+                </li>
+            
+                <li class="nav-item">
                     <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
                 </li>
             
@@ -89,42 +95,43 @@
     </div>
 </nav>
     <div id="main">
-        <div class="container">
+        
+    <div class="container">
 
-    <h2 class="post-title">全域哈希推导</h2>
-    <div class="post-subtitle">
-      <span class="iconfont icon-date1"></span>
-      <span><a href="#">Feb 11, 2020</a></span>&nbsp;
-      
-      <span class="iconfont icon-icon-goodscategory"></span>
-        <span>
-            
-                <a href="/categories/%E7%AE%97%E6%B3%95/">算法 </a>
-            
-        </span>&nbsp;
-      
-      
-      <span class="iconfont icon-tags"></span>
-        <span>
-            
-                <a href="/tags/CLRS/">CLRS </a>&nbsp;
-            
-                <a href="/tags/%E7%AE%97%E6%B3%95/">算法 </a>&nbsp;
-            
-        </span>
-      
-      
-          <span class="iconfont icon-post"></span>
-          <span><a href="">921 Words</a></span>&nbsp;
-      
-      
-          <span class="post-count">
-          <span class="iconfont icon-time"></span>
-          <a href="">3 min</a></span>&nbsp;
-      
-    </div>
-    <article class="post-content">
-        <blockquote>
+        <h2 class="post-title">全域哈希推导</h2>
+        <div class="post-subtitle">
+        <span class="iconfont icon-date1"></span>
+        <span><a href="#">Feb 11, 2020</a></span>&nbsp;
+        
+        <span class="iconfont icon-icon-goodscategory"></span>
+            <span>
+                
+                    <a href="/categories/%E7%AE%97%E6%B3%95/">算法 </a>
+                
+            </span>&nbsp;
+        
+        
+        <span class="iconfont icon-tags"></span>
+            <span>
+                
+                    <a href="/tags/CLRS/">CLRS </a>&nbsp;
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">算法 </a>&nbsp;
+                
+            </span>
+        
+        
+            <span class="iconfont icon-post"></span>
+            <span><a href="">921 Words</a></span>&nbsp;
+        
+        
+            <span class="post-count">
+            <span class="iconfont icon-time"></span>
+            <a href="">3 min</a></span>&nbsp;
+        
+        </div>
+        <article class="post-content">
+            <blockquote>
 <p>在 CLRS 上看到了 Chapter 12，讲解了 Hash 相关的内容，其中关于全域哈希（universal hash）和完美哈希（perfect hash）看的不是很懂。后来补了 MIT 的算法导论公开课，稍微弄懂了一些。这里做一个关于全域哈希简单的推导，加强记忆。</p>
 </blockquote>
 <h2 id="普通哈希函数的缺陷"><a href="#普通哈希函数的缺陷" class="headerlink" title="普通哈希函数的缺陷"></a>普通哈希函数的缺陷</h2><p>对于一个给定的哈希函数 $h$ ，存在着一个明显的缺陷：我们总能找到一套特殊的 keys $K$，使得 $K$ 中的 $\forall k \in  K$，其 $h(k)$ 均相等。这样的哈希函数的会导致哈希后的结果回退成一个链表，搜索操作将会是 $O(n)$ 的时间复杂度。</p>
@@ -149,60 +156,60 @@
 <p>$$<br>b = (r - ak) \ mod \ p<br>$$</p>
 <p>因为 $r \neq s$，而 $p$ 比任何 key 都大，我们可以认为 $(r, s)$ 有 $p(p-1)$ 种取法。</p>
 
-    </article>
+        </article>
 
-    
-        <div class="copyright">
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/">http://www.foxerlee.top/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/</a>
-                </p>
-                </div>
-            
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
-                </p>
-                </div>
-            
-            
-                <p>
-                    <strong>Signature:</strong> stay hungry, stay foolish
-                </p>
-            
-        </div>
-    
+        
+            <div class="copyright">
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/">http://www.foxerlee.top/2020/02/11/%E5%85%A8%E5%9F%9F%E5%93%88%E5%B8%8C%E6%8E%A8%E5%AF%BC/</a>
+                    </p>
+                    </div>
+                
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                    </p>
+                    </div>
+                
+                
+                    <p>
+                        <strong>Signature:</strong> stay hungry, stay foolish
+                    </p>
+                
+            </div>
+        
 
-    <ul class="pagination">
-          
-              <li class="page-item prev-link">
-                  <a class="page-link" href="/2020/02/17/wordcount/"> &laquo; Prev </a>
-              </li>
-          
-          
-              <li class="page-item next-link">
-                  <a class="page-link" href="/2020/02/05/Leetcode-crawler/"> Next &raquo; </a>
-              </li>
-          
-      </ul>
-    
-    
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- hor -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-3129494579607503"
-            data-ad-slot="2940693228"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    
-    
-        <div id="gitalk-container"></div>
+        <ul class="pagination">
+            
+                <li class="page-item prev-link">
+                    <a class="page-link" href="/2020/02/17/wordcount/"> &laquo; Prev </a>
+                </li>
+            
+            
+                <li class="page-item next-link">
+                    <a class="page-link" href="/2020/02/05/Leetcode-crawler/"> Next &raquo; </a>
+                </li>
+            
+        </ul>
+        
+        
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- hor -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3129494579607503"
+                data-ad-slot="2940693228"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        
+        
+            <div id="gitalk-container"></div>
 
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="/js/md5.js"></script>
@@ -222,15 +229,17 @@
       })
       gitalk.render('gitalk-container')
 </script>
-    
-  </div>
+        
+    </div>
+
+
     </div>
     <footer id="footer" class="footer">
     <div>
         <span>
             Foxerlee © 
                 2017 - 
-                2021  
+                2022  
         </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">

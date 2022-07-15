@@ -16,6 +16,8 @@
 <!-- Google Roboto Mono Font -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Crimson Text | Google Open Sans -->
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:300,800" rel="stylesheet">
 <!-- Gitalk -->
 
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -62,7 +64,7 @@
                 </li>
             
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archive</a>
                 </li>
             
                 <li class="nav-item">
@@ -82,6 +84,10 @@
                 </li>
             
                 <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/albums">Albums</a>
+                </li>
+            
+                <li class="nav-item">
                     <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
                 </li>
             
@@ -89,42 +95,43 @@
     </div>
 </nav>
     <div id="main">
-        <div class="container">
+        
+    <div class="container">
 
-    <h2 class="post-title">Learning to Compare Relation Network for Few-Shot Learning（翻译）</h2>
-    <div class="post-subtitle">
-      <span class="iconfont icon-date1"></span>
-      <span><a href="#">May 14, 2019</a></span>&nbsp;
-      
-      <span class="iconfont icon-icon-goodscategory"></span>
-        <span>
-            
-                <a href="/categories/%E8%AE%BA%E6%96%87/">论文 </a>
-            
-        </span>&nbsp;
-      
-      
-      <span class="iconfont icon-tags"></span>
-        <span>
-            
-                <a href="/tags/Few-shot-Learning/">Few-shot Learning </a>&nbsp;
-            
-                <a href="/tags/Zero-shot-Learning/">Zero-shot Learning </a>&nbsp;
-            
-        </span>
-      
-      
-          <span class="iconfont icon-post"></span>
-          <span><a href="">9.5k Words</a></span>&nbsp;
-      
-      
-          <span class="post-count">
-          <span class="iconfont icon-time"></span>
-          <a href="">36 min</a></span>&nbsp;
-      
-    </div>
-    <article class="post-content">
-        <p>原文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.06025">https://arxiv.org/abs/1711.06025</a></p>
+        <h2 class="post-title">Learning to Compare Relation Network for Few-Shot Learning（翻译）</h2>
+        <div class="post-subtitle">
+        <span class="iconfont icon-date1"></span>
+        <span><a href="#">May 14, 2019</a></span>&nbsp;
+        
+        <span class="iconfont icon-icon-goodscategory"></span>
+            <span>
+                
+                    <a href="/categories/%E8%AE%BA%E6%96%87/">论文 </a>
+                
+            </span>&nbsp;
+        
+        
+        <span class="iconfont icon-tags"></span>
+            <span>
+                
+                    <a href="/tags/Few-shot-Learning/">Few-shot Learning </a>&nbsp;
+                
+                    <a href="/tags/Zero-shot-Learning/">Zero-shot Learning </a>&nbsp;
+                
+            </span>
+        
+        
+            <span class="iconfont icon-post"></span>
+            <span><a href="">9.5k Words</a></span>&nbsp;
+        
+        
+            <span class="post-count">
+            <span class="iconfont icon-time"></span>
+            <a href="">36 min</a></span>&nbsp;
+        
+        </div>
+        <article class="post-content">
+            <p>原文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.06025">https://arxiv.org/abs/1711.06025</a></p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文提出了一个针对小样本学习（ Learning），在概念上简单、灵活且通用的框架，该分类器只需要提供少量的样本，即可实现对一个新类的识别。 我们的方法称为关系网络（Relation Network — RN ），实现了从头开始的端到端训练。 在元学习（Meta-learning）期间，模型在训练过程中通过比较少量图像，从中得到一个深度距离度量，这些设计方法均是为了模拟小样本学习的环境。一旦经过训练，关系网络就能够通过计算支撑图像与每个新类的少数示例之间的关系得分来对新类别的图像进行分类，而无需进一步更新网络。 除了实现改进小样本学习性能外，我们的框架还可以轻松扩展到零次学习（Zero-shot learning）。对五个基准测试的实验表明，本文的简单模型为这两个任务提供了一种统一而有效的方法。</p>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>深度学习模型已经在视觉识别任务中取得了巨大成功 [22,15,35]。然而，这些监督学习模型需要大量标记数据和多次训练迭代来训练其大量的参数。由于标记样本的成本存在，这严重限制了它们对新类别的可扩展性，但更根本地限制了它们对新出现的（例如，新的消费者设备）或稀有（例如，稀有动物）类别的适用性，因为其可能根本不存在大量的标记好的样本。相比之下，人类非常擅长在很少的样本、或者根本没有样本的情况下也能识别事物，即小样本学习 [23,9] 或零次学习 [24]。例如，孩子们可以很轻松地通过书中的单张图片，或者它看起来很像一头有条纹的马这样的描述，概括、识别出“斑马”的概念。由于传统深度学习的方法在小样本学习和零次学习中表现较差，并且受到人类针对这两种情况的较强能力的启发，在机器学习领域最近激起了关于小样本学习 [8, 39, 32, 18, 20, 10, 27, 36, 29] 和零次学习  [11, 3, 24, 45, 25, 31] 的研究兴趣。</p>
 <p>小样本学习旨在仅通过少量的带标记样本即可实现识别新的视觉类别。其只需一个或几个样本即可得到较好的结果，挑战了深度学习中中的标准“微调”实践 [10]。数据增强和正则化技术可以减轻在有限数据体系下的过拟合情况，但它们无法解决这一问题。因此，针对小样本学习的现代方法通常将训练分解为一个辅助的元学习过程，其中迁移学习的知识以良好的初始条件 [10]，嵌入 [36, 39] 或优化策略 [29] 的形式学习，这样小样本学习的问题可通过微调 [10] 学习到的优化策略或者计算前馈传递 [36, 39, 4, 32] 来解决，而不需要更新网络权重。零次学习也受到相关难题的影响。识别器通过一个描述了其类别的例子进行训练（例如，一次的单一样本图像），使基于梯度学习情况下的数据不足成为一项挑战。</p>
@@ -285,60 +292,60 @@
 <p>[47] Z. Zhang and V. Saligrama. Zero-shot learning via joint latent similarity embedding. In CVPR, 2016.</p>
 <p>[48] Z. Zhang and V. Saligrama. Zero-shot recognition via structured prediction. In ECCV, 2016.</p>
 
-    </article>
+        </article>
 
-    
-        <div class="copyright">
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2019/05/14/Learning-to-Compare-Relation-Network-for-Few-Shot-Learning%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">http://www.foxerlee.top/2019/05/14/Learning-to-Compare-Relation-Network-for-Few-Shot-Learning%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/</a>
-                </p>
-                </div>
-            
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
-                </p>
-                </div>
-            
-            
-                <p>
-                    <strong>Signature:</strong> stay hungry, stay foolish
-                </p>
-            
-        </div>
-    
+        
+            <div class="copyright">
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2019/05/14/Learning-to-Compare-Relation-Network-for-Few-Shot-Learning%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/">http://www.foxerlee.top/2019/05/14/Learning-to-Compare-Relation-Network-for-Few-Shot-Learning%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/</a>
+                    </p>
+                    </div>
+                
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                    </p>
+                    </div>
+                
+                
+                    <p>
+                        <strong>Signature:</strong> stay hungry, stay foolish
+                    </p>
+                
+            </div>
+        
 
-    <ul class="pagination">
-          
-              <li class="page-item prev-link">
-                  <a class="page-link" href="/2019/12/06/%E7%81%AB%E4%BB%A5%E6%B8%90%E7%86%84/"> &laquo; Prev </a>
-              </li>
-          
-          
-              <li class="page-item next-link">
-                  <a class="page-link" href="/2019/05/01/%E5%8D%97%E4%BA%AC%E8%A1%8C%E5%90%8E%E7%9A%84%E6%9D%82%E6%83%B3/"> Next &raquo; </a>
-              </li>
-          
-      </ul>
-    
-    
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- hor -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-3129494579607503"
-            data-ad-slot="2940693228"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    
-    
-        <div id="gitalk-container"></div>
+        <ul class="pagination">
+            
+                <li class="page-item prev-link">
+                    <a class="page-link" href="/2019/12/06/%E7%81%AB%E4%BB%A5%E6%B8%90%E7%86%84/"> &laquo; Prev </a>
+                </li>
+            
+            
+                <li class="page-item next-link">
+                    <a class="page-link" href="/2019/05/01/%E5%8D%97%E4%BA%AC%E8%A1%8C%E5%90%8E%E7%9A%84%E6%9D%82%E6%83%B3/"> Next &raquo; </a>
+                </li>
+            
+        </ul>
+        
+        
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- hor -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3129494579607503"
+                data-ad-slot="2940693228"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        
+        
+            <div id="gitalk-container"></div>
 
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="/js/md5.js"></script>
@@ -358,15 +365,17 @@
       })
       gitalk.render('gitalk-container')
 </script>
-    
-  </div>
+        
+    </div>
+
+
     </div>
     <footer id="footer" class="footer">
     <div>
         <span>
             Foxerlee © 
                 2017 - 
-                2021  
+                2022  
         </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">

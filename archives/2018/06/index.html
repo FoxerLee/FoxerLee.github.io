@@ -16,6 +16,8 @@
 <!-- Google Roboto Mono Font -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Crimson Text | Google Open Sans -->
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:300,800" rel="stylesheet">
 <!-- Gitalk -->
 
 <!-- Mathjax support -->
@@ -60,7 +62,7 @@
                 </li>
             
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archive</a>
                 </li>
             
                 <li class="nav-item">
@@ -80,6 +82,10 @@
                 </li>
             
                 <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/albums">Albums</a>
+                </li>
+            
+                <li class="nav-item">
                     <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
                 </li>
             
@@ -90,62 +96,53 @@
         <div class="container archive">
     <h1 class="archive-title">Archives</h1>
     <div class="archive-subtitle">
-        <span class="iconfont icon-post archive-icon"></span> 25 Posts
+        <span class="iconfont icon-post archive-icon"></span> 28 Posts
     </div>
 
     
     
         
+            
 
-        
-            <h4 class="archive-date">Jun, 2018</h4>
-        
-
-        <!-- <li class="archive-post">
-            <a class="archive-post-link" href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">
-                <span class="archive-post-title">Cassandra 3.11.2 单节点配置教程</span>
-                <span class="archive-post-date">Jun 18, 2018</span>
-            </a>
-        </li> -->
-
-        <div class="archive-post">
-            <h4 class="archive-post-title">
-                <a href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">Cassandra 3.11.2 单节点配置教程</a>
-            </h4>
-            <p>
+            
+                <h4 class="archive-date">Jun, 2018</h4>
                 
-                    Cassandra 配置先决环境测试的系统环境为 Ubuntu 14.04 LTS
+
+
+            <div class="archive-post">
+                <h4 class="archive-post-title">
+                    <a href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">Cassandra 3.11.2 单节点配置教程</a>
+                </h4>
+                <p>
+                    
+                        Cassandra 配置先决环境测试的系统环境为 Ubuntu 14.04 LTS
 安装 Cassandra 需要首先安装 Java 8 环境，Oracle Java Standard Edition 8 或者 OpenJDK 8 均可。OpenJDK 8 的安装方法如下：
 123$ sudo apt-get update$ sudo apt-get install openjdk-8-jdk$ sudo apt-get install openjdk-8-jre
 
 如果想使用 cqlsh，需要
-                
-            </p>
-            <span class="archive-post-date">Jun 18, 2018</span>
-            <a href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">
-                <span class="archive-more iconfont icon-post"></span>
-            </a>
-        </div>
+                    
+                </p>
+                <span class="archive-post-date">Jun 18, 2018</span>
+                <a href="/2018/06/18/Cassandra%203.11.2%20%E5%8D%95%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">
+                    <span class="archive-more iconfont icon-post"></span>
+                </a>
+            </div>
+        
 
     
         
+            
 
-        
+            
 
-        <!-- <li class="archive-post">
-            <a class="archive-post-link" href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">
-                <span class="archive-post-title">vs2015 连接 MySQL 教程</span>
-                <span class="archive-post-date">Jun 02, 2018</span>
-            </a>
-        </li> -->
 
-        <div class="archive-post">
-            <h4 class="archive-post-title">
-                <a href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">vs2015 连接 MySQL 教程</a>
-            </h4>
-            <p>
-                
+            <div class="archive-post">
+                <h4 class="archive-post-title">
+                    <a href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">vs2015 连接 MySQL 教程</a>
+                </h4>
+                <p>
                     
+                        
 首先安装如下两个软件
 
 
@@ -160,13 +157,14 @@
 
 
 在自己的项目中，选择 References，然后 
-                
-            </p>
-            <span class="archive-post-date">Jun 02, 2018</span>
-            <a href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">
-                <span class="archive-more iconfont icon-post"></span>
-            </a>
-        </div>
+                    
+                </p>
+                <span class="archive-post-date">Jun 02, 2018</span>
+                <a href="/2018/06/02/vs2015%20%E8%BF%9E%E6%8E%A5%20MySQL%20%E6%95%99%E7%A8%8B/">
+                    <span class="archive-more iconfont icon-post"></span>
+                </a>
+            </div>
+        
 
     
     
@@ -178,7 +176,7 @@
         <span>
             Foxerlee © 
                 2017 - 
-                2021  
+                2022  
         </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">

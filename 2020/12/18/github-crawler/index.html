@@ -16,6 +16,8 @@
 <!-- Google Roboto Mono Font -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Crimson Text | Google Open Sans -->
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:300,800" rel="stylesheet">
 <!-- Gitalk -->
 
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -62,7 +64,7 @@
                 </li>
             
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archive</a>
                 </li>
             
                 <li class="nav-item">
@@ -82,6 +84,10 @@
                 </li>
             
                 <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/albums">Albums</a>
+                </li>
+            
+                <li class="nav-item">
                     <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
                 </li>
             
@@ -89,44 +95,45 @@
     </div>
 </nav>
     <div id="main">
-        <div class="container">
+        
+    <div class="container">
 
-    <h2 class="post-title">根据 Star 数爬取 GitHub 仓库</h2>
-    <div class="post-subtitle">
-      <span class="iconfont icon-date1"></span>
-      <span><a href="#">Dec 18, 2020</a></span>&nbsp;
-      
-      <span class="iconfont icon-icon-goodscategory"></span>
-        <span>
-            
-                <a href="/categories/crawler/">crawler </a>
-            
-        </span>&nbsp;
-      
-      
-      <span class="iconfont icon-tags"></span>
-        <span>
-            
-                <a href="/tags/crawler/">crawler </a>&nbsp;
-            
-                <a href="/tags/%E7%88%AC%E8%99%AB/">爬虫 </a>&nbsp;
-            
-                <a href="/tags/github/">github </a>&nbsp;
-            
-        </span>
-      
-      
-          <span class="iconfont icon-post"></span>
-          <span><a href="">1.7k Words</a></span>&nbsp;
-      
-      
-          <span class="post-count">
-          <span class="iconfont icon-time"></span>
-          <a href="">9 min</a></span>&nbsp;
-      
-    </div>
-    <article class="post-content">
-        <p>首先导入需要使用到的包，并且设定 <code>headers</code>：</p>
+        <h2 class="post-title">根据 Star 数爬取 GitHub 仓库</h2>
+        <div class="post-subtitle">
+        <span class="iconfont icon-date1"></span>
+        <span><a href="#">Dec 18, 2020</a></span>&nbsp;
+        
+        <span class="iconfont icon-icon-goodscategory"></span>
+            <span>
+                
+                    <a href="/categories/crawler/">crawler </a>
+                
+            </span>&nbsp;
+        
+        
+        <span class="iconfont icon-tags"></span>
+            <span>
+                
+                    <a href="/tags/crawler/">crawler </a>&nbsp;
+                
+                    <a href="/tags/%E7%88%AC%E8%99%AB/">爬虫 </a>&nbsp;
+                
+                    <a href="/tags/github/">github </a>&nbsp;
+                
+            </span>
+        
+        
+            <span class="iconfont icon-post"></span>
+            <span><a href="">1.7k Words</a></span>&nbsp;
+        
+        
+            <span class="post-count">
+            <span class="iconfont icon-time"></span>
+            <a href="">9 min</a></span>&nbsp;
+        
+        </div>
+        <article class="post-content">
+            <p>首先导入需要使用到的包，并且设定 <code>headers</code>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
 
 <p>之后是确定要爬取的界面。在 GitHub 的 search 界面可以根据 star 数量排序，并且跳到下一页只需要修改 <code>url</code> 的参数，比较方便，我们就用这个界面。</p>
@@ -151,60 +158,60 @@
 <p>这样就能根据 star 排序爬取某个 topic 的仓库了。如果想用其他的排序或者内容，修改排序参数即可。具体参数可以直接去 search 界面尝试。</p>
 <p>完整代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">30</span>):</span><br><span class="line">    url = <span class="string">&#x27;https://github.com/search?o=desc&amp;p=&#x27;</span> + str(i) + <span class="string">&#x27;&amp;q=hexo-theme&amp;s=stars&amp;type=Repositories&#x27;</span></span><br><span class="line">    r = requests.get(url, headers=headers)</span><br><span class="line">    </span><br><span class="line">    text = r.text</span><br><span class="line">    soup = BeautifulSoup(text, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line"></span><br><span class="line">    divs = soup.find_all(<span class="string">&#x27;li&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;repo-list-item&#x27;</span>&#125;)</span><br><span class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> divs:</span><br><span class="line">        print(d)</span><br><span class="line">        star = d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;muted-link&#x27;</span>&#125;).text.strip()</span><br><span class="line">        <span class="comment"># print(star)</span></span><br><span class="line"></span><br><span class="line">        desc = d.find(<span class="string">&#x27;p&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;mb-1&#x27;</span>&#125;).text.strip()</span><br><span class="line">        <span class="comment"># print(desc)</span></span><br><span class="line"></span><br><span class="line">        name = d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;v-align-middle&#x27;</span>&#125;).text.strip()</span><br><span class="line">        <span class="comment"># print(name)</span></span><br><span class="line"></span><br><span class="line">        href = <span class="string">&#x27;https://www.github.com&#x27;</span> +  d.find(<span class="string">&#x27;a&#x27;</span>, attrs=&#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;v-align-middle&#x27;</span>&#125;)[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">    print(<span class="string">&#x27;finish page &#123;&#125;&#x27;</span>.format(i))</span><br></pre></td></tr></table></figure>
-    </article>
+        </article>
 
-    
-        <div class="copyright">
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/12/18/github-crawler/">http://www.foxerlee.top/2020/12/18/github-crawler/</a>
-                </p>
-                </div>
-            
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
-                </p>
-                </div>
-            
-            
-                <p>
-                    <strong>Signature:</strong> stay hungry, stay foolish
-                </p>
-            
-        </div>
-    
+        
+            <div class="copyright">
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/12/18/github-crawler/">http://www.foxerlee.top/2020/12/18/github-crawler/</a>
+                    </p>
+                    </div>
+                
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                    </p>
+                    </div>
+                
+                
+                    <p>
+                        <strong>Signature:</strong> stay hungry, stay foolish
+                    </p>
+                
+            </div>
+        
 
-    <ul class="pagination">
-          
-              <li class="page-item prev-link">
-                  <a class="page-link" href="/2021/01/02/summary-2020/"> &laquo; Prev </a>
-              </li>
-          
-          
-              <li class="page-item next-link">
-                  <a class="page-link" href="/2020/09/11/CA-hotel/"> Next &raquo; </a>
-              </li>
-          
-      </ul>
-    
-    
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- hor -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-3129494579607503"
-            data-ad-slot="2940693228"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    
-    
-        <div id="gitalk-container"></div>
+        <ul class="pagination">
+            
+                <li class="page-item prev-link">
+                    <a class="page-link" href="/2021/01/02/summary-2020/"> &laquo; Prev </a>
+                </li>
+            
+            
+                <li class="page-item next-link">
+                    <a class="page-link" href="/2020/09/11/CA-hotel/"> Next &raquo; </a>
+                </li>
+            
+        </ul>
+        
+        
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- hor -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3129494579607503"
+                data-ad-slot="2940693228"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        
+        
+            <div id="gitalk-container"></div>
 
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="/js/md5.js"></script>
@@ -224,15 +231,17 @@
       })
       gitalk.render('gitalk-container')
 </script>
-    
-  </div>
+        
+    </div>
+
+
     </div>
     <footer id="footer" class="footer">
     <div>
         <span>
             Foxerlee © 
                 2017 - 
-                2021  
+                2022  
         </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">

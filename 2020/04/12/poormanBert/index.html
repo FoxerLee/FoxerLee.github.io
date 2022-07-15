@@ -16,6 +16,8 @@
 <!-- Google Roboto Mono Font -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<!-- Google Crimson Text | Google Open Sans -->
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans:300,800" rel="stylesheet">
 <!-- Gitalk -->
 
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -62,7 +64,7 @@
                 </li>
             
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archives</a>
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/archives">Archive</a>
                 </li>
             
                 <li class="nav-item">
@@ -82,6 +84,10 @@
                 </li>
             
                 <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/albums">Albums</a>
+                </li>
+            
+                <li class="nav-item">
                     <a class="nav-link" style="margin-right: 10px; margin-left:10px;" href="/resume.pdf">Resume</a>
                 </li>
             
@@ -89,42 +95,43 @@
     </div>
 </nav>
     <div id="main">
-        <div class="container">
+        
+    <div class="container">
 
-    <h2 class="post-title">Poor Man's BERT 论文笔记</h2>
-    <div class="post-subtitle">
-      <span class="iconfont icon-date1"></span>
-      <span><a href="#">Apr 12, 2020</a></span>&nbsp;
-      
-      <span class="iconfont icon-icon-goodscategory"></span>
-        <span>
-            
-                <a href="/categories/%E8%AE%BA%E6%96%87/">论文 </a>
-            
-        </span>&nbsp;
-      
-      
-      <span class="iconfont icon-tags"></span>
-        <span>
-            
-                <a href="/tags/Transformer/">Transformer </a>&nbsp;
-            
-                <a href="/tags/BERT/">BERT </a>&nbsp;
-            
-        </span>
-      
-      
-          <span class="iconfont icon-post"></span>
-          <span><a href="">496 Words</a></span>&nbsp;
-      
-      
-          <span class="post-count">
-          <span class="iconfont icon-time"></span>
-          <a href="">1 min</a></span>&nbsp;
-      
-    </div>
-    <article class="post-content">
-        <p>本文采取了 Layer-dropping 的策略，在 pre-trained model 上进行微调，从而实现模型压缩。本文提出的 model 与原始的 BERT、RoBERTa 和 XLNet 相比，可以达到 40% 的减枝效率，同时维持 98% 的准确度。</p>
+        <h2 class="post-title">Poor Man's BERT 论文笔记</h2>
+        <div class="post-subtitle">
+        <span class="iconfont icon-date1"></span>
+        <span><a href="#">Apr 12, 2020</a></span>&nbsp;
+        
+        <span class="iconfont icon-icon-goodscategory"></span>
+            <span>
+                
+                    <a href="/categories/%E8%AE%BA%E6%96%87/">论文 </a>
+                
+            </span>&nbsp;
+        
+        
+        <span class="iconfont icon-tags"></span>
+            <span>
+                
+                    <a href="/tags/Transformer/">Transformer </a>&nbsp;
+                
+                    <a href="/tags/BERT/">BERT </a>&nbsp;
+                
+            </span>
+        
+        
+            <span class="iconfont icon-post"></span>
+            <span><a href="">496 Words</a></span>&nbsp;
+        
+        
+            <span class="post-count">
+            <span class="iconfont icon-time"></span>
+            <a href="">1 min</a></span>&nbsp;
+        
+        </div>
+        <article class="post-content">
+            <p>本文采取了 Layer-dropping 的策略，在 pre-trained model 上进行微调，从而实现模型压缩。本文提出的 model 与原始的 BERT、RoBERTa 和 XLNet 相比，可以达到 40% 的减枝效率，同时维持 98% 的准确度。</p>
 <ul>
 <li>代码地址：<a target="_blank" rel="noopener" href="https://github.com/hsajjad/transformers">https://github.com/hsajjad/transformers</a></li>
 <li>论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2004.03844v1.pdf">https://arxiv.org/pdf/2004.03844v1.pdf</a></li>
@@ -137,60 +144,60 @@
 <h3 id="删去-Bottom-Layer"><a href="#删去-Bottom-Layer" class="headerlink" title="删去 Bottom-Layer"></a>删去 Bottom-Layer</h3><p>之前的研究发现，lower layers 更多的是和 words 以及 word pieces 交互，这在 NLP 其实是很重要的，因此不应该删去。文章做这个实验主要是为了保证整体实验的完整性。</p>
 <h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>研究结果发现删去 Top-Layer 总是能够获得较好的效果，而 Bottom-Layer 删去对于准确度损害更大。另外三种方法在不同的 model 上的实验结果显示出了差异性，这与不同 model 的特性有关。</p>
 
-    </article>
+        </article>
 
-    
-        <div class="copyright">
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/04/12/poormanBert/">http://www.foxerlee.top/2020/04/12/poormanBert/</a>
-                </p>
-                </div>
-            
-            
-                <div style="overflow-x: auto;white-space:nowrap;">
-                <p>
-                    <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
-                </p>
-                </div>
-            
-            
-                <p>
-                    <strong>Signature:</strong> stay hungry, stay foolish
-                </p>
-            
-        </div>
-    
+        
+            <div class="copyright">
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>Permalink:</strong> <a href="http://www.foxerlee.top/2020/04/12/poormanBert/">http://www.foxerlee.top/2020/04/12/poormanBert/</a>
+                    </p>
+                    </div>
+                
+                
+                    <div style="overflow-x: auto;white-space:nowrap;">
+                    <p>
+                        <strong>License:</strong> Copyright (c) <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE
+                    </p>
+                    </div>
+                
+                
+                    <p>
+                        <strong>Signature:</strong> stay hungry, stay foolish
+                    </p>
+                
+            </div>
+        
 
-    <ul class="pagination">
-          
-              <li class="page-item prev-link">
-                  <a class="page-link" href="/2020/06/02/06-02-2020/"> &laquo; Prev </a>
-              </li>
-          
-          
-              <li class="page-item next-link">
-                  <a class="page-link" href="/2020/03/22/flowsense/"> Next &raquo; </a>
-              </li>
-          
-      </ul>
-    
-    
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- hor -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-3129494579607503"
-            data-ad-slot="2940693228"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    
-    
-        <div id="gitalk-container"></div>
+        <ul class="pagination">
+            
+                <li class="page-item prev-link">
+                    <a class="page-link" href="/2020/06/02/06-02-2020/"> &laquo; Prev </a>
+                </li>
+            
+            
+                <li class="page-item next-link">
+                    <a class="page-link" href="/2020/03/22/flowsense/"> Next &raquo; </a>
+                </li>
+            
+        </ul>
+        
+        
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- hor -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3129494579607503"
+                data-ad-slot="2940693228"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        
+        
+            <div id="gitalk-container"></div>
 
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="/js/md5.js"></script>
@@ -210,15 +217,17 @@
       })
       gitalk.render('gitalk-container')
 </script>
-    
-  </div>
+        
+    </div>
+
+
     </div>
     <footer id="footer" class="footer">
     <div>
         <span>
             Foxerlee © 
                 2017 - 
-                2021  
+                2022  
         </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">
